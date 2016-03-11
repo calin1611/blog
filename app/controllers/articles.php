@@ -21,8 +21,6 @@ class Articles {
     $title = "Articles";
     include VIEWS . "layout_view.php";
 
-
-    //            include "app/views/comments_view.php";
   }
 
   function getHtml() {
@@ -35,7 +33,6 @@ class Articles {
     }
     $list .= "</table>";
 
-    echo $list;
   }
 
   function getJson() {
@@ -67,6 +64,32 @@ class Articles {
 
   public function getArticlesAjax(){
     $articlesModel = new ArticlesModel;
-    $articles = $articlesModel->getAll;	
+    $articles = $articlesModel->getAll;
+  }
+
+  function paginate() {
+    if ($_POST) {
+      $page = $_POST['page']; // Current page number
+      $per_page = $_POST['per_page']; // Articles per page
+      if ($page != 1) $start = ($page-1) * $per_page;
+      else $start=0;
+
+      $articlesModel = new ArticlesModel;
+      $numArticles = $articlesModel->countArticles();
+
+      $numPage = ceil($numArticles[0] / $per_page); // Total number of pages
+
+      // We build the article list
+      $articleList = '';
+
+      $articlesOnPage = $articlesModel->getArticlesForPage($start, $per_page);
+      foreach ($articlesOnPage as $value) {
+        $articleList .= '<div class="well well-sm">' . $value["id"] . '. <b>' . $value["title"] . '</b><p>' . $value["body"] . '</p></div>';
+      }
+
+      // We send back the total number of page and the article list
+      $dataBack = array('numPage' => $numPage, 'articleList' => $articleList);
+      echo json_encode($dataBack);
+    }
   }
 }

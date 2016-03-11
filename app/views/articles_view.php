@@ -1,48 +1,30 @@
 <h1>Articles Page</h1>
 
 <div>
-  Articles List:
 
-  <div id="articleArea"><?php $this->getHtml(); ?></div>
-
-<?php
-  foreach ($this->allArticles as $key => $value) {
-?>
-
-  <div>
-    <div><strong><?php echo $value["title"]; ?> </strong></div>
-    <div> <?php echo $value["body"]; ?> </div>
-    <br/>
+  <div id="articleArea"></div> <!-- Where articles appear -->
+  <!-- Where pagination appears -->
+  <div id="pagination">
+  	<!-- Just tell the system we start with page 1 (id=1) -->
+  	<!-- See the .js file, we trigger a click when page is loaded -->
+  	<div><a href="#" id="1"></a></div>
   </div>
+
+
+
 
   <?php
-    }
+  // foreach ($this->allArticles as $key => $value) {
   ?>
 
-<!-- My Pagination -->
-  <div>
-    <nav>
-      <ul class="pagination">
-        <li>
-          <a href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
+  <!-- <div>
+  <div><strong><?php echo $value["title"]; ?> </strong></div>
+  <div> <?php echo $value["body"]; ?> </div>
+  <br/>
+</div> -->
 
-        <li><a href="index.php?p=1" id="1">nr 1</a></li>
-        <li><a href="#">nr 2</a></li>
-
-        <li>
-          <a href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-<!-- My Pagination -->
-
-
-
+<?php
+// }
+?>
 
 </div>

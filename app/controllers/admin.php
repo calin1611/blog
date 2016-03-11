@@ -19,6 +19,7 @@ require MODELS . "articles_model.php";
       $articles = $articlesModel->getAll();
       echo json_encode($articles);
     }
+
     function getArticle() {
       header('Content-Type: application/json');
 
@@ -26,6 +27,7 @@ require MODELS . "articles_model.php";
       $article = $articlesModel->getArticle($_GET["id"]);
       echo json_encode($article[0]);
     }
+
     function updateArticle() {
       header('Content-Type: application/json');
 
