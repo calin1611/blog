@@ -32,7 +32,7 @@ class Articles {
       $list .= "<tr><td>" . $articles[$i]["title"] . "</td><td>" . $articles[$i]["body"] . "</td></tr>";
     }
     $list .= "</table>";
-
+// echo $list;
   }
 
   function getJson() {
@@ -74,15 +74,17 @@ class Articles {
       if ($page != 1) $start = ($page-1) * $per_page;
       else $start=0;
 
+// var_dump($_POST);
+      $search = (!empty($_POST['search'])) ? $_POST['search'] : '';
       $articlesModel = new ArticlesModel;
-      $numArticles = $articlesModel->countArticles();
+      $numArticles = $articlesModel->countArticles($search);
 
-      $numPage = ceil($numArticles[0] / $per_page); // Total number of pages
+      $numPage = ceil($numArticles / $per_page); // Total number of pages
 
       // We build the article list
       $articleList = '';
 
-      $articlesOnPage = $articlesModel->getArticlesForPage($start, $per_page);
+      $articlesOnPage = $articlesModel->getArticlesForPage($start, $per_page, $search);
       foreach ($articlesOnPage as $value) {
         $articleList .= '<div class="well well-sm">' . $value["id"] . '. <b>' . $value["title"] . '</b><p>' . $value["body"] . '</p></div>';
       }

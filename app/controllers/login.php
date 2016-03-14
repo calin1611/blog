@@ -1,11 +1,10 @@
 <?php
+require MODELS . "login_model.php";
 
     class Login {
 
         function index() {
 
-
-            require MODELS . "login_model.php";
             $loginModel = new LoginModel();
 
             $pageContent = VIEWS . "login_view.php";
@@ -16,11 +15,12 @@
 
         }
 
-//        function logout() {
-//            session_start();
-//
-//            session_destroy();
-//            $_SESSION["admin"] = "";
-//            $this->index();
-//        }
+       function logout() {
+          //  session_start();
+
+           $_SESSION["logged"] = "";
+           session_destroy();
+          //  $this->index();
+          header("Location: http://localhost/blog/");
+       }
     }

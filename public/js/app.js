@@ -46,7 +46,7 @@ $( document ).ready(function() {
     $('#articleForm [name]').val('');
   });
 
-  $('input[type=submit]').on('click', function() {
+  $('#saveButton').on('click', function() {
     var articleForm = $('#articleForm');
       if($('input[name=id]').val() !== '') {
         $.ajax({

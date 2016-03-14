@@ -5,10 +5,13 @@ $('document').ready(function() {
 $('#pagination').on('click', 'a', function(e) { // When click on a 'a' element of the pagination div
 	var page = this.id; // Page number is the id of the 'a' element
 	var pagination = ''; // Init pagination
+  var search = $("#searchBox").val();
 
 	// $('#articleArea').html('<img src="design/loader-small.gif" alt="" />'); // Display a processing icon
-	var data = {page: page, per_page: 4}; // Create JSON which will be sent via Ajax
+	var data = {page: page, per_page: 4, search: search}; // Create JSON which will be sent via Ajax
 	// We set up the per_page var at 4. You may change to any number you need.
+
+console.log(search);
 
 	$.ajax({ // jQuery Ajax
 		method: 'POST',
