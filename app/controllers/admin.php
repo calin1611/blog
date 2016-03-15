@@ -1,18 +1,19 @@
 <?php
-// var_dump($_GET["id"]);
-require MODELS . "articles_model.php";
+  require MODELS . "articles_model.php";
 
   class Admin {
 
     function index() {
-
-      $pageContent = VIEWS . "admin_view.php";
-      $title = "Admin";
-      include VIEWS . "layout_view.php";
+      if ($_SESSION["admin"]) {
+        $pageContent = VIEWS . "admin_view.php";
+        $title = "Admin";
+        include VIEWS . "layout_view.php";
+      } else {
+        echo "You do not have admin privileges.";
+      }
     }
 
     function getJson($value='') {
-      //nu trebuie sa mai fie alta afisare in afara de cea de JSON. daca este, nu va mai fi returnat JSONul pentru ca $.ajax nu stie sa interpreteze altceva in afara de json
       header('Content-Type: application/json');
 
       $articlesModel = new ArticlesModel();
