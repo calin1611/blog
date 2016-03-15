@@ -9,7 +9,7 @@
 
     function getArticle($id) {
       $statement = $this->executeQuery("SELECT * FROM articles WHERE id = " . $id);
-      return $statement->fetchAll(PDO::FETCH_ASSOC);
+      return $statement->fetchAll(PDO::FETCH_ASSOC)[0];
     }
 
     function countArticles() {

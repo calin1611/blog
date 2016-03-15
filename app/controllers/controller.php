@@ -4,6 +4,7 @@
             //toate paginile disponibile in blog
             $pages = array(
                 "articles" => array("path" => "articles.php", "class" => "Articles"),
+                "article" => array("path" => "article.php", "class" => "Article"),
                 "contact" => array("path" => "contact.php", "class" => "Contact"),
                 "login" => array("path" => "login.php", "class" => "Login"),
                 "admin" => array("path" => "admin.php", "class" => "Admin")
