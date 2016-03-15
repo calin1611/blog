@@ -2,8 +2,10 @@ $('document').ready(function() {
 	$("#pagination a").trigger('click'); // When page is loaded we trigger a click
 });
 
-$('#pagination').on('click', 'a', function(e) { // When click on a 'a' element of the pagination div
-	var page = this.id; // Page number is the id of the 'a' element
+function paginate(pg) { // When click on a 'a' element of the pagination div
+	// var page = $("#pagination a").id || $("#pagination a")[0].id; // Page number is the id of the 'a' element
+	var page = this.id || this[0].id; // Page number is the id of the 'a' element
+	// var page = pg.attr('id');
 	var pagination = ''; // Init pagination
   var search = $("#searchBox").val();
 
@@ -11,7 +13,9 @@ $('#pagination').on('click', 'a', function(e) { // When click on a 'a' element o
 	var data = {page: page, per_page: 4, search: search}; // Create JSON which will be sent via Ajax
 	// We set up the per_page var at 4. You may change to any number you need.
 
-console.log(search);
+console.log(this);
+console.log(page);
+console.log($("#pagination a"));
 
 	$.ajax({ // jQuery Ajax
 		method: 'POST',
@@ -44,4 +48,12 @@ console.log(search);
 		}
 	});
 	return false;
-});
+
+}
+
+// $('#searchButton').on('click', paginate(1));
+$('#pagination').on('click', 'a', paginate.bind($('#pagination a')));
+
+$('#pagination a').on("click", function() {
+  console.log("clicked!");
+})
