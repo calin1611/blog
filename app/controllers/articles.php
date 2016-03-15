@@ -77,7 +77,7 @@ class Articles {
       $articlesModel = new ArticlesModel;
       $numArticles = $articlesModel->countArticles();
 
-      $numPage = ceil($numArticles[0] / $per_page); // Total number of pages
+      $numPage = ceil($numArticles / $per_page); // Total number of pages
 
       // We build the article list
       $articleList = '';

@@ -14,13 +14,12 @@
 
         function countArticles() {
           $statement = $this->executeQuery("SELECT COUNT(id) FROM articles");
-          return $statement->fetch(PDO::FETCH_NUM);
+          return $statement->fetch(PDO::FETCH_ASSOC)['COUNT(id)'];
         }
 
         function getArticlesForPage($begin, $limit) {
-          $statement = $this->executeQuery('SELECT id, title, body FROM articles LIMIT ' . $begin . ', ' . $limit);
+          $statement = $this->executeQuery('SELECT id, title, body FROM articles ORDER BY `articles`.`id` ASC LIMIT ' . $begin . ', ' . $limit);
           return $statement->fetchAll(PDO::FETCH_ASSOC);
-          // return $statement;
         }
 
         function insertArticle($article) {
