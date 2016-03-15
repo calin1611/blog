@@ -1,5 +1,6 @@
 <?php
 require MODELS . "articles_model.php";
+require MODELS . "comments_model.php";
 
 class Article {
 
@@ -7,36 +8,31 @@ class Article {
     // $articleId = $_GET["article"];
     $articlesModel = new ArticlesModel();
     // $article = $articlesModel->getArticle(23);
-    $article = $articlesModel->getArticle($_GET['id']);   //Asa va trebui sa arate
-
-    var_dump($article);
-    var_dump($_GET);
+    $article = $articlesModel->getArticle($_GET['id']);
 
     $articleTitle = $article['title'];
     $articleBody = $article['body'];
     $articleCreationDate = $article['creation_date'];
 
-    // require MODELS . "comments_model.php";
-    // $commentsModel = new CommentsModel();
-    // $comments = $commentsModel->getAll();
+    $commentsModel = new CommentsModel();
+    $comments = $commentsModel->getComments($_GET['id']);
 
     $pageContent = VIEWS . "article_view.php";
-    $title = "Article NAME";
+    $title = $article['title'] . " - Article";
     include VIEWS . "layout_view.php";
 
   }
 
-  function getHtml() {
-    $articlesModel = new ArticlesModel();
-    $articles = $articlesModel->getAll();
+  function postComment(){
+    $commentsModel = new CommentsModel();
+    $comment["article_id"] = $_GET['id'];
+    $comment["user"] = $_POST['name'];
+    $comment["title"] = $_POST['title'];
+    $comment["body"] = $_POST['body'];
 
-    $list = "<table>";
-    for ($i=0; $i<count($articles); $i++) {
-      $list .= "<tr><td>" . $articles[$i]["title"] . "</td><td>" . $articles[$i]["body"] . "</td></tr>";
-    }
-    $list .= "</table>";
+    $commentsModel->addComment($comment);
 
+    header("Location: http://localhost/blog/article?id=" . $_GET['id']);
   }
-
 
 }
