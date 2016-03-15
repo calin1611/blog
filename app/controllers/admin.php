@@ -1,13 +1,16 @@
 <?php
-// var_dump($_GET["id"]);
-require MODELS . "articles_model.php";
+  require MODELS . "articles_model.php";
 
   class Admin {
 
     function index() {
-      $pageContent = VIEWS . "admin_view.php";
-      $title = "Admin";
-      include VIEWS . "layout_view.php";
+      if ($_SESSION["admin"]) {
+        $pageContent = VIEWS . "admin_view.php";
+        $title = "Admin";
+        include VIEWS . "layout_view.php";
+      } else {
+        echo "You do not have admin privileges.";
+      }
     }
 
     function getJson($value='') {

@@ -18,7 +18,9 @@
 
           if (($username == $result["username"]) && ($password == $result["password"])) {
             $_SESSION["logged"] = $result["username"];
+
             if ($result['class'] == "admin") {
+              $_SESSION["admin"] = true;
               header("Location: http://localhost/blog/admin");
             } else {
               header("Location: http://localhost/blog/");
