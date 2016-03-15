@@ -1,27 +1,35 @@
 <?php
-    class LoginModel {
-        public $error = "";
-        protected $loginCredentials = array("username" => "admin", "password" => "123");
+  require_once "db_model.php";
 
-        function __construct() {
+  class LoginModel extends DB {
+    public $error = "";
 
-            if (isset($_POST["submit"])) {
-                if (!empty($_POST["username"]) && (!empty($_POST["password"]))) {
-                    $username = $_POST["username"];
-                    $password = $_POST["password"];
-                    if (($username == $this->loginCredentials["username"]) && ($password == $this->loginCredentials["password"])) {
-                        $_SESSION["logged"] = "admin";
-                    } else {
-                        $this->error .= "Wrong username or password.<br>";
-                    }
-                } else {
-                    $this->error .= "Please fill the login form.<br>";
-                }
+    function __construct() {
+
+      if (isset($_POST["submit"])) {
+        if (!empty($_POST["username"]) && (!empty($_POST["password"]))) {
+          $username = $_POST["username"];
+          $password = $_POST["password"];
+
+          $this->db = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+
+          $statement = $this->executeQuery("SELECT * FROM users WHERE username = '" . $username . "' AND password = '" . $password . "'");
+          $result =  $statement->fetch(PDO::FETCH_ASSOC);
+
+          if (($username == $result["username"]) && ($password == $result["password"])) {
+            $_SESSION["logged"] = $result["username"];
+            if ($result['class'] == "admin") {
+              header("Location: http://localhost/blog/admin");
+            } else {
+              header("Location: http://localhost/blog/");
             }
-//pot fi sterse
-            echo "<br>user: " . $username;
-            echo "<br>pass: " . $password;
-            echo "<br>";
-            var_dump($_SESSION);
+          } else {
+            $this->error .= "Wrong username or password.<br>";
+          }
+        } else {
+          $this->error .= "Please fill the login form.<br>";
         }
+      }
+
     }
+  }
