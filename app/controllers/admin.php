@@ -5,14 +5,12 @@ require MODELS . "articles_model.php";
   class Admin {
 
     function index() {
-
       $pageContent = VIEWS . "admin_view.php";
       $title = "Admin";
       include VIEWS . "layout_view.php";
     }
 
     function getJson($value='') {
-      //nu trebuie sa mai fie alta afisare in afara de cea de JSON. daca este, nu va mai fi returnat JSONul pentru ca $.ajax nu stie sa interpreteze altceva in afara de json
       header('Content-Type: application/json');
 
       $articlesModel = new ArticlesModel();
