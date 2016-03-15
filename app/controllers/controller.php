@@ -18,16 +18,18 @@
             // print_r( pathinfo($_SERVER["REQUEST_URI"]));
             // var_dump($_GET);
 
-            // $uri = $_SERVER["PATH_INFO"];
-            $uri = $_SERVER["REQUEST_URI"];
+            $uri = $_SERVER["PATH_INFO"];
+            // $uri = $_SERVER["REQUEST_URI"];
             $segments = explode("/", $uri);
             //segments array: [0]=>"" [1]=>root [2]=>controller [3]=>method
 // var_dump($_SERVER);
+// var_dump($segments);
+// var_dump($uri);
             //pagina default pentru aterizare (landing page) cand acceseaza rootul aplicatiei
             $page = "articles";
-            $controller = $segments[2];
-            $method = empty($segments[3]) ? "" : $segments[3];
-            if(!empty($controller)) {
+            $controller = $segments[1];
+            $method = empty($segments[2]) ? "" : $segments[2];
+            if(!empty($controller) && $controller != "index.php") {
                 if (array_key_exists($controller, $pages)) {
                     $page = $controller;
                 }
@@ -37,10 +39,10 @@
                     echo "<br>" . $_SERVER["REQUEST_URI"];
 
                     echo "<br> NOT FOUND";
+                    var_dump($_GET);
                     exit;
                 }
             }
-            // var_dump($_SERVER);
             // echo "controller var:";
             // print_r(pathinfo($_SERVER["REDIRECT_URL"]));
 

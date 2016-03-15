@@ -6,7 +6,8 @@ class Article {
   function index() {
     // $articleId = $_GET["article"];
     $articlesModel = new ArticlesModel();
-    $article = $articlesModel->getArticle(23);
+    // $article = $articlesModel->getArticle(23);
+    $article = $articlesModel->getArticle($_GET['id']);   //Asa va trebui sa arate
 
     var_dump($article);
     var_dump($_GET);
