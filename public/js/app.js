@@ -32,14 +32,14 @@ $( document ).ready(function() {
   });
 
   $('#articlesTbl').on('click', '[data-delete-id]', function() {
-      $.ajax({
-          url: "http://localhost/blog/admin/deleteArticle/?id=" + $(this).data('delete-id'),
-          method: "DELETE",
-          data: {id: $(this).data("delete-id")},
-          success: function( data ) {
-            getArticles();
-          }
-      });
+    $.ajax({
+      url: "http://localhost/blog/admin/deleteArticle/?id=" + $(this).data('delete-id'),
+      method: "DELETE",
+      data: {id: $(this).data("delete-id")},
+      success: function( data ) {
+        getArticles();
+      }
+    });
   });
 
   $('input[type=button]').on('click', function() {

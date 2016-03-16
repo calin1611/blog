@@ -23,16 +23,31 @@ class Article {
 
   }
 
+  // Originalul!!!
+  // function postComment(){
+  //   $commentsModel = new CommentsModel();
+  //   $comment["article_id"] = $_GET['id'];
+  //   $comment["user"] = $_POST['name'];
+  //   $comment["title"] = $_POST['title'];
+  //   $comment["body"] = $_POST['body'];
+  //
+  //   $commentsModel->addComment($comment);
+  //
+  //   header("Location: http://localhost/blog/article?id=" . $_GET['id']);
+  // }
+
   function postComment(){
     $commentsModel = new CommentsModel();
-    $comment["article_id"] = $_GET['id'];
-    $comment["user"] = $_POST['name'];
-    $comment["title"] = $_POST['title'];
-    $comment["body"] = $_POST['body'];
+    $commentsModel->addComment($_POST);
+return lastInsertId;
+    // header("Location: http://localhost/blog/article?id=" . $_GET['id']);
+  }
 
-    $commentsModel->addComment($comment);
+  function getComments(){
+    $commentsModel = new CommentsModel();
+    $comments = $commentsModel->getComments($_GET['id']);
 
-    header("Location: http://localhost/blog/article?id=" . $_GET['id']);
+    echo json_encode($comments);
   }
 
 }

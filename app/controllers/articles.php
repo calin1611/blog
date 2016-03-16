@@ -44,6 +44,15 @@ class Articles {
     echo json_encode($articles);
   }
 
+  function getArticleJson() {
+    header('Content-Type: application/json');
+
+    $articlesModel = new ArticlesModel();
+    $articles = $articlesModel->getArticle($_GET['id']);
+
+    echo json_encode($articles);
+  }
+
   function add() {
     header('Content-Type: application/json');
 

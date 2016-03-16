@@ -3,7 +3,7 @@
 
   class ArticlesModel extends DB {
     function getAll() {
-      $statement = $this->executeQuery("SELECT * FROM articles");
+      $statement = $this->executeQuery("SELECT * FROM articles ORDER BY `articles`.`id` ASC");
       return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
