@@ -39,7 +39,7 @@ class Article {
   function postComment(){
     $commentsModel = new CommentsModel();
     $commentsModel->addComment($_POST);
-return lastInsertId;
+// return lastInsertId;
     // header("Location: http://localhost/blog/article?id=" . $_GET['id']);
   }
 
