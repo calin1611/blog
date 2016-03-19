@@ -1,0 +1,19 @@
+
+----------INTREBARI----------
+
+-notice-uri de la xDebug. Se mai poate taia din ele?
+
+
+
+
+
+----------REZOLVATE----------
+
+-in contact_model si login_model: de ce e necesar $this->db = new PDO("mysql:host=localhost; dbname=test", "root", "");
+  REZOLVAT: trebuie functie separata pentru a trimite mail, nu sa fie in __construct()
+
+-Ordinea articolelor in lista e descrescatoare.
+  REZOLVAT: trebuie specificat mereu cum sa fie afisate
+
+-MVC unde e marea parte a logicii?
+  REZOLVAT: In Controller
