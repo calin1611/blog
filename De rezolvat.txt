@@ -2,3 +2,4 @@ articole pending
 aprobare de comentarii,
 raspuns la comentarii (reply)
 paginare cu local storage
+infrumusetare comentarii 

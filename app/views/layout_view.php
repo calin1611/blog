@@ -1,42 +1,55 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php echo $title; ?></title>
-    <!--Bootstrap-->
-        <link href="<?php echo BASE_URL; ?>public/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
-        <!--        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">-->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-    <!--END.Bootstrap-->
-
-    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL.CSS; ?>style.css">
-
-    <!-- CSS for pagination -->
-    <style>
-      #pagination div { display: inline-block; margin-right: 5px; margin-top: 5px }
-      #pagination .cell a { border-radius: 3px; font-size: 11px; color: #333; padding: 8px; text-decoration:none; border: 1px solid #d3d3d3; background-color: #f8f8f8; }
-      #pagination .cell a:hover { border: 1px solid #c6c6c6; background-color: #f0f0f0;  }
-      #pagination .cell_active span { border-radius: 3px; font-size: 11px; color: #333; padding: 8px; border: 1px solid #c6c6c6; background-color: #e9e9e9; }
-      #pagination .cell_disabled span { border-radius: 3px; font-size: 11px; color: #777777; padding: 8px; border: 1px solid #dddddd; background-color: #ffffff; }
-    </style>
-  </head>
+  <?php include VIEWS . "header_view.php"; ?>
 
   <body>
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://localhost/blog/">MyBlog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+          <ul class="nav navbar-nav">
+            <li <?php if ($title == 'Articles') {echo "class='active'";} ?> ><a href="http://localhost/blog/">Home <span class="sr-only">(current)</span></a></li>
+            <li <?php if ($title == 'Contact') {echo "class='active'";} ?> ><a href="http://localhost/blog/contact">Contact</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <!-- <li><a href="#">Link</a></li>
+            <button type="button" class="btn btn-default navbar-btn">Sign in</button> -->
+            <?php
+            if ($_SESSION['logged']) {
+              if ($_SESSION['logged'] == "admin") {
+                echo '<li ';
+                if ($title == 'Admin') {echo "class='active'";}
+                echo '><a href="http://localhost/blog/admin">Admin Page</a></li>';
+              }
+              echo "<a href='http://localhost/blog/login/logout'><button type='button' class='btn btn-danger'>Log out</button></a>";
+            } else {
+              echo "<a href='http://localhost/blog/login'><button type='button' class='btn btn-info'>Log in</button></a>";
+            }
+            ?>
+          </ul>
+
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
 
     <div class="container">
 
       <?php
-        include VIEWS . "menu_view.php";
-        if ($_SESSION['logged']) {
-          echo "Hello, " . $_SESSION['logged'] . "! <br/>";
-        };
-
         include $pageContent;
       ?>
 

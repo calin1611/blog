@@ -6,7 +6,7 @@ $( document ).ready(function() {
             //console.log(json);
             var table = '';
             for (var i=0; i<data.length; i++) {
-                table += '<tr><td>' + data[i].title + '</td><td><button data-edit-id="' + data[i].id + '">Edit</button><button data-delete-id="' + data[i].id + '">Delete</button></td></tr>';
+                table += '<tr><td>' + data[i].title + '</td><td><button class="btn btn-default admin-btn" data-edit-id="' + data[i].id + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button><button class="btn btn-danger admin-btn" data-delete-id="' + data[i].id + '"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td></tr>';
             }
 
             $('#articlesTbl').html(table);

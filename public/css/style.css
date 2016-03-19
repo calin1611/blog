@@ -1,9 +1,21 @@
 body {
-    background-color: #5cb85c;
+  background-color: #5cb85c;
 }
 
 .comment-wrapper {
   margin-bottom: 20px;
   border: 1px solid gray;
   border-radius: 5px;
+}
+
+.navbar-right button {
+  margin: 8px 15px;
+}
+
+.admin-btn {
+  margin-left: 5px;
+}
+
+table td {
+  vertical-align: middle;
 }
