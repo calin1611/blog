@@ -3,30 +3,22 @@
 
   class ContactModel extends DB {
     protected $to = "calin1611@gmail.com";
-    function __construct() {
 
-      //fara linia de mai jos NU VREA sa execute prepare() din executeQuery()
-      $this->db = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+    function sendEmail($name, $email, $message){
+//
+      // $query = "INSERT INTO `messages` (name, email, message) VALUES ('" . $name . "', '" . $email . "', '" . $message . "');";
+      // $this->executeQuery($query);
 
-      if (!empty($_POST["name"]) && !empty($_POST["email"]) && !empty($_POST["message"])){
+//___________
+      // $query = "INSERT INTO `messages` (name, email, message) VALUES (?, ?, ?);";
+      // $queryParameters = array($name , $email, $message);
+      // $this->executeQueryParameters($query, $queryParameters);
 
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $message = $_POST['message'];
+//___________
+      $query = "INSERT INTO `messages` (name, email, message) VALUES (:name, :email, :message);";
+      $queryParameters = array(':name' => $name , ':email' => $email, ':message' => $message);
+      $this->executeQueryNamedParameters($query, $queryParameters);
 
-        mail(
-          $this->to,
-          "MVC - Contact form",
-          "Sender's name: " . $name . " \r\n" . "Sender's email: " . $email . " \r\n" . "Message: \r\n" . $message,
-          "From: " . $email);
-
-        echo "MODEL - 1/2 Mailul trebuie sa fie trimis. <br>";
-
-
-        $query = "INSERT INTO `messages` (name, email, message) VALUES ('" . $name . "', '" . $email . "', '" . $message . "');";
-        $this->executeQuery($query);
-        echo "MODEL - Query: " . $query . "<br>";
-        echo "MODEL - 2/2 Ar trebui sa fie in db. <br>";
-      }
+      // header("Location: http://localhost/blog/");
     }
   }
