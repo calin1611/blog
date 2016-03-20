@@ -84,7 +84,17 @@ class Articles {
 
       $articlesOnPage = $articlesModel->getArticlesForPage($start, $per_page);
       foreach ($articlesOnPage as $value) {
-        $articleList .= '<a href="http://localhost/blog/article?id=' . $value["id"] . '"><div class="well well-sm">' . $value["id"] . '. <b>' . $value["title"] . '</b><p>' . $value["body"] . '</p></div></a>';
+        if (strlen($value["body"]) > 95){
+          $croppedBody = substr($value["body"], 0, strpos(wordwrap($value["body"], 100), "\n"));
+        } else {
+          $croppedBody = substr($value["body"], 0, 100);
+        }
+
+        if (strlen($croppedBody) < strlen($value["body"])){
+          $articleList .= '<a href="http://localhost/blog/article?id=' . $value["id"] . '"><div class="well well-sm"><h2>' . $value["title"] . '</h2><p>' . $croppedBody . '... <strong>Read More</strong></p></div></a>';
+        } else {
+          $articleList .= '<a href="http://localhost/blog/article?id=' . $value["id"] . '"><div class="well well-sm"><h2>' . $value["title"] . '</h2><p>' . $value["body"] . '</p></div></a>';
+        }
       }
 
       // We send back the total number of page and the article list
