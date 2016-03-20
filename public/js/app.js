@@ -1,16 +1,20 @@
 $( document ).ready(function() {
   function getArticles() {
     $.ajax({
-        url: "http://localhost/blog/admin/getJson",
-        success: function(data) {
-            //console.log(json);
-            var table = '';
-            for (var i=0; i<data.length; i++) {
-                table += '<tr><td>' + data[i].title + '</td><td><button class="btn btn-default admin-btn" data-edit-id="' + data[i].id + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button><button class="btn btn-danger admin-btn" data-delete-id="' + data[i].id + '"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td></tr>';
-            }
-
-            $('#articlesTbl').html(table);
+      url: "http://localhost/blog/admin/getJson",
+      success: function(data) {
+        //console.log(json);
+        var table = '';
+        for (var i=0; i<data.length; i++) {
+          table += '<tr><td>' + data[i].title + '</td>';
+          table += '<td class="buttons-td">';
+            table += '<button class="btn btn-default admin-btn" data-edit-id="' + data[i].id + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>';
+            table += '<button class="btn btn-danger admin-btn" data-delete-id="' + data[i].id + '"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>';
+          table += '</td></tr>';
         }
+
+        $('#articlesTbl').html(table);
+      }
 
     });
   }
@@ -32,14 +36,14 @@ $( document ).ready(function() {
   });
 
   $('#articlesTbl').on('click', '[data-delete-id]', function() {
-      $.ajax({
-          url: "http://localhost/blog/admin/deleteArticle/?id=" + $(this).data('delete-id'),
-          method: "DELETE",
-          data: {id: $(this).data("delete-id")},
-          success: function( data ) {
-            getArticles();
-          }
-      });
+    $.ajax({
+      url: "http://localhost/blog/admin/deleteArticle/?id=" + $(this).data('delete-id'),
+      method: "DELETE",
+      data: {id: $(this).data("delete-id")},
+      success: function( data ) {
+        getArticles();
+      }
+    });
   });
 
   $('input[type=button]').on('click', function() {
