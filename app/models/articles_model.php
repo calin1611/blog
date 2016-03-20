@@ -17,16 +17,15 @@
       return $statement->fetch(PDO::FETCH_ASSOC)['COUNT(id)'];
     }
 
-    function getArticlesForPage($begin, $limit) {
-      $statement = $this->executeQuery('SELECT id, title, body FROM articles ORDER BY `articles`.`id` DESC LIMIT ' . $begin . ', ' . $limit);
-      return $statement->fetchAll(PDO::FETCH_ASSOC);
+    function countApprovedArticles() {
+      $statement = $this->executeQuery("SELECT COUNT(id) FROM articles WHERE status = 'approved'");
+      return $statement->fetch(PDO::FETCH_ASSOC)['COUNT(id)'];
     }
 
-    // function insertArticle($article) {  //ORIGINAL
-    //     $this->executeQuery("INSERT INTO articles (title, body) VALUES ('" . $article["title"] . "', '" . $article["body"] . "');");
-    //     return $this->db->lastInsertId();
-    //
-    // }
+    function getArticlesForPage($begin, $limit) {
+      $statement = $this->executeQuery('SELECT id, title, body FROM articles WHERE status = "approved" ORDER BY `articles`.`id` DESC LIMIT ' . $begin . ', ' . $limit);
+      return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     function insertArticle($article) {
         $query = "INSERT INTO articles (title, body, user_id) VALUES (:title, :body, :user_id);";
@@ -38,6 +37,17 @@
     function updateArticle($article) {
       $statement = $this->executeQuery("UPDATE articles SET title ='".$article["title"]."',body = '".$article["body"]."' WHERE id =".$article["id"]);
       return $statement->rowCount();
+    }
+
+    function approveArticle($article) {
+      $statement = $this->executeQuery("UPDATE articles SET status = 'approved' WHERE id =".$article["id"]);
+      // return $statement->rowCount();
+      return "approved";
+    }
+
+    function unApproveArticle($article) {
+      $statement = $this->executeQuery("UPDATE articles SET status = 'pending' WHERE id =".$article["id"]);
+      return "UNapproved";
     }
 
     function deleteArticle($article) {

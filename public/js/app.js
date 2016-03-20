@@ -3,11 +3,15 @@ $( document ).ready(function() {
     $.ajax({
       url: "http://localhost/blog/admin/getJson",
       success: function(data) {
-        //console.log(json);
         var table = '';
         for (var i=0; i<data.length; i++) {
           table += '<tr><td>' + data[i].title + '</td>';
           table += '<td class="buttons-td">';
+            if (data[i].status === "pending") {
+              table += '<button class="btn btn-success admin-btn" data-approve-id="' + data[i].id + '"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>';
+            } else if (data[i].status === "approved") {
+              table += '<button class="btn btn-warning admin-btn" data-unapprove-id="' + data[i].id + '"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>';
+            }
             table += '<button class="btn btn-default admin-btn" data-edit-id="' + data[i].id + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>';
             table += '<button class="btn btn-danger admin-btn" data-delete-id="' + data[i].id + '"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>';
           table += '</td></tr>';
@@ -31,6 +35,30 @@ $( document ).ready(function() {
           $('input[name=title]').val(data.title);
           $('textarea').val(data.body);
           $('input[name=id]').val(data.id);
+      }
+    });
+  });
+
+  $('#articlesTbl').on('click', '[data-approve-id]', function() {
+    console.log($(this).data('approve-id'));
+    $.ajax({
+      url: "http://localhost/blog/admin/approveArticle/?id=" + $(this).data('approve-id'),
+      method: "POST",
+      success: function( data ) {
+        console.log(data);
+        getArticles();
+      }
+    });
+  });
+
+  $('#articlesTbl').on('click', '[data-unapprove-id]', function() {
+    console.log($(this).data('unapprove-id'));
+    $.ajax({
+      url: "http://localhost/blog/admin/unApproveArticle/?id=" + $(this).data('unapprove-id'),
+      method: "POST",
+      success: function( data ) {
+        console.log(data);
+        getArticles();
       }
     });
   });

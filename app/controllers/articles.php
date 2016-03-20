@@ -75,7 +75,7 @@ class Articles {
       else $start=0;
 
       $articlesModel = new ArticlesModel;
-      $numArticles = $articlesModel->countArticles();
+      $numArticles = $articlesModel->countApprovedArticles();
 
       $numPage = ceil($numArticles / $per_page); // Total number of pages
 

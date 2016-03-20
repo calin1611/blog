@@ -27,7 +27,8 @@
 
       $articlesModel = new ArticlesModel();
       $article = $articlesModel->getArticle($_GET["id"]);
-      echo json_encode($article[0]);
+
+      echo json_encode($article);
     }
 
     function updateArticle() {
@@ -39,6 +40,22 @@
       $articlesModel = new ArticlesModel();
       $article = $articlesModel->updateArticle($PUT);
 
+      echo json_encode($article);
+    }
+
+    function approveArticle() {
+      header('Content-Type: application/json');
+
+      $articlesModel = new ArticlesModel();
+      $article = $articlesModel->approveArticle($_GET);
+      echo json_encode($article);
+    }
+
+    function unApproveArticle() {
+      header('Content-Type: application/json');
+
+      $articlesModel = new ArticlesModel();
+      $article = $articlesModel->unApproveArticle($_GET);
       echo json_encode($article);
     }
 
