@@ -3,3 +3,8 @@ aprobare de comentarii,
 raspuns la comentarii (reply)
 paginare cu local storage
 infrumusetare comentarii 
+Stocarea utilizatorilor in BDD (Hash la parola)
+Vizualizare utilizatori
+profil utilizatori
+formatare data postare articol
+Poze la articole
