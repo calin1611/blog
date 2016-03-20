@@ -3,7 +3,7 @@
 
   class ArticlesModel extends DB {
     function getAll() {
-      $statement = $this->executeQuery("SELECT * FROM articles");
+      $statement = $this->executeQuery("SELECT * FROM articles ORDER BY `articles`.`id` DESC");
       return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -18,7 +18,7 @@
     }
 
     function getArticlesForPage($begin, $limit) {
-      $statement = $this->executeQuery('SELECT id, title, body FROM articles ORDER BY `articles`.`id` ASC LIMIT ' . $begin . ', ' . $limit);
+      $statement = $this->executeQuery('SELECT id, title, body FROM articles ORDER BY `articles`.`id` DESC LIMIT ' . $begin . ', ' . $limit);
       return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
