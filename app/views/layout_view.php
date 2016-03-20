@@ -27,20 +27,35 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
+
+            <?php if (isset($_SESSION['logged'])) {?>
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Hello, <?php echo $_SESSION['logged']; ?>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <?php
+                if ($_SESSION['logged']) {
+                  if ($_SESSION['logged'] == "admin") {
+                    echo '<li ';
+                    if ($title == 'Admin') {echo "class='active'";}
+                    echo '><a href="http://localhost/blog/admin">Admin Page</a></li>';
+                  }
+                  echo "<li><a href='http://localhost/blog/post'>Post an article</a></li>";
+                  echo "<li role='separator' class='divider'></li>";
+                  echo "<li><a href='http://localhost/blog/login/logout'>Log out</a></li>";
+                }
+                ?>
+              </ul>
+            </div>
+            <?php } else { ?>
+              <a href='http://localhost/blog/login'><button type='button' class='btn btn-info'>Log in</button></a>
+            <?php  } ?>
+
             <!-- <li><a href="#">Link</a></li>
             <button type="button" class="btn btn-default navbar-btn">Sign in</button> -->
-            <?php
-            if ($_SESSION['logged']) {
-              if ($_SESSION['logged'] == "admin") {
-                echo '<li ';
-                if ($title == 'Admin') {echo "class='active'";}
-                echo '><a href="http://localhost/blog/admin">Admin Page</a></li>';
-              }
-              echo "<a href='http://localhost/blog/login/logout'><button type='button' class='btn btn-danger'>Log out</button></a>";
-            } else {
-              echo "<a href='http://localhost/blog/login'><button type='button' class='btn btn-info'>Log in</button></a>";
-            }
-            ?>
+
           </ul>
 
         </div><!-- /.navbar-collapse -->
@@ -51,6 +66,7 @@
 
       <?php
         include $pageContent;
+        var_dump($_SESSION);
       ?>
 
     </div>
