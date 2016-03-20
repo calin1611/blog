@@ -53,9 +53,6 @@
               <a href='http://localhost/blog/login'><button type='button' class='btn btn-info'>Log in</button></a>
             <?php  } ?>
 
-            <!-- <li><a href="#">Link</a></li>
-            <button type="button" class="btn btn-default navbar-btn">Sign in</button> -->
-
           </ul>
 
         </div><!-- /.navbar-collapse -->
@@ -66,7 +63,7 @@
 
       <?php
         include $pageContent;
-        var_dump($_SESSION);
+        // var_dump($_SESSION);
       ?>
 
     </div>

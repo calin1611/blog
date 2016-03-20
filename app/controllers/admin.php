@@ -9,8 +9,9 @@
         $title = "Admin";
         include VIEWS . "layout_view.php";
       } else {
-        echo "You do not have admin privileges.";
-      }
+        $title = "Restricted page";
+        $pageContent = VIEWS . "restricted_view.php";
+        include VIEWS . "layout_view.php";      }
     }
 
     function getJson($value='') {
@@ -44,10 +45,16 @@
     function addArticle() {
       header('Content-Type: application/json');
 
-      $articlesModel = new ArticlesModel();
-      $article = $articlesModel->insertArticle($_POST);
+      if ((isset($_POST['title']) && !empty($_POST['title'])) && (isset($_POST['body']) && !empty($_POST['body']))) {
+        $article["title"] = $_POST['title'];
+        $article["body"] = $_POST['body'];
+        $article["user_id"] = $_SESSION['id'];
 
-      echo json_encode($article);
+        $articlesModel = new ArticlesModel();
+
+        $result = $articlesModel->insertArticle($article);
+        echo json_encode($result);
+      }
     }
 
     function deleteArticle() {

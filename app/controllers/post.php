@@ -5,10 +5,15 @@ class Post {
 
   function index() {
 
-    $pageContent = VIEWS . "post_article_view.php";
-    $title = "Post Article";
-    include VIEWS . "layout_view.php";
-
+    if ($_SESSION["logged"]) {
+      $pageContent = VIEWS . "post_article_view.php";
+      $title = "Post Article";
+      include VIEWS . "layout_view.php";
+    } else {
+      $title = "Restricted page";
+      $pageContent = VIEWS . "restricted_view.php";
+      include VIEWS . "layout_view.php";
+    }
   }
 
   function postArticle(){
@@ -23,7 +28,6 @@ class Post {
       header("Location: http://localhost/blog/post?success=true");
     } else {
       header("Location: http://localhost/blog/post?success=false");
-
     }
   }
 
