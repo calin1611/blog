@@ -22,8 +22,16 @@
       return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // function insertArticle($article) {  //ORIGINAL
+    //     $this->executeQuery("INSERT INTO articles (title, body) VALUES ('" . $article["title"] . "', '" . $article["body"] . "');");
+    //     return $this->db->lastInsertId();
+    //
+    // }
+
     function insertArticle($article) {
-        $this->executeQuery("INSERT INTO articles (title, body) VALUES ('" . $article["title"] . "', '" . $article["body"] . "');");
+        $query = "INSERT INTO articles (title, body, user_id) VALUES (:title, :body, :user_id);";
+        $queryParameters = array(':title' => $article["title"] , ':body' => $article["body"], ':user_id' => $article["user_id"]);
+        $this->executeQueryNamedParameters($query, $queryParameters);
         return $this->db->lastInsertId();
     }
 

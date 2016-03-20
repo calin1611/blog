@@ -6,6 +6,8 @@
 <p>
   Published on:
   <?php echo $articleCreationDate; ?>
+
+  by <b><?php echo $articleAuthor; ?></b>
 </p>
 
 <h3>Comments:</h3>

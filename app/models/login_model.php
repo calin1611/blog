@@ -18,6 +18,7 @@
 
           if (($username == $result["username"]) && ($password == $result["password"])) {
             $_SESSION["logged"] = $result["username"];
+            $_SESSION["id"] = $result["id"];
 
             if ($result['class'] == "admin") {
               $_SESSION["admin"] = true;
