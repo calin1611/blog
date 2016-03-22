@@ -11,6 +11,9 @@ operatiuni in lot pe articole/comentarii/useri
 landing page pentru admin
 curatare modele
 generare id-uri random pentru utilizatori si articole
+trimitere catre articole si useri din admin
+afisare comentarii in AdminZone
+session_destroy() mai bun
 
 --------Rezolvat--------
 articole pending
