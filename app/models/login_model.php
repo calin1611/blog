@@ -11,6 +11,9 @@
       $result =  $statement->fetch(PDO::FETCH_ASSOC);
       if (isset($result['id'])) {
         //exista userul
+        //daca parola nu e buna=>wrong password
+          //altfel =>logare user
+        //daca nu exista userul, propunere de inregistrare.
         if ($credentials['username']) {
 
         }
