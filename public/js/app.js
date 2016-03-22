@@ -103,4 +103,66 @@ $( document ).ready(function() {
        });
      }
   });
+
+
+//-----------------------USERS-----------------------
+  function getUsers() {
+    $.ajax({
+      url: "http://localhost/blog/admin/getUsersJson",
+      success: function(data) {
+        var table = '';
+        for (var i=0; i<data.length; i++) {
+          table += '<tr><td>' + data[i].username + '</td>';
+          table += '<td class="buttons-td">';
+            if (data[i].class === "user") {
+              table += '<button class="btn btn-success admin-btn" data-mkadmin-id="' + data[i].id + '">User to  ADMIN</button>';
+            } else if (data[i].class === "admin") {
+              table += '<button class="btn btn-warning admin-btn" data-mkuser-id="' + data[i].id + '">Admin to USER</button>';
+            }
+            table += '<button class="btn btn-danger admin-btn" data-delete-id="' + data[i].id + '"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>';
+          table += '</td></tr>';
+        }
+
+        $('#usersTbl').html(table);
+      }
+
+    });
+  }
+  getUsers();
+
+
+    $('#usersTbl').on('click', '[data-mkadmin-id]', function() {
+      console.log($(this).data('mkadmin-id'));
+      $.ajax({
+        url: "http://localhost/blog/admin/mkAdmin/?id=" + $(this).data('mkadmin-id'),
+        method: "POST",
+        success: function( data ) {
+          console.log(data);
+          getUsers();
+        }
+      });
+    });
+
+    $('#usersTbl').on('click', '[data-mkuser-id]', function() {
+      console.log($(this).data('mkuser-id'));
+      $.ajax({
+        url: "http://localhost/blog/admin/mkUser/?id=" + $(this).data('mkuser-id'),
+        method: "POST",
+        success: function( data ) {
+          console.log(data);
+          getUsers();
+        }
+      });
+    });
+
+    $('#usersTbl').on('click', '[data-delete-id]', function() {
+      $.ajax({
+        url: "http://localhost/blog/admin/deleteUser/?id=" + $(this).data('delete-id'),
+        method: "DELETE",
+        data: {id: $(this).data("delete-id")},
+        success: function( data ) {
+          getUsers();
+        }
+      });
+    });
 });

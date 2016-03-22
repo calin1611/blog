@@ -22,7 +22,7 @@
 
             if ($result['class'] == "admin") {
               $_SESSION["admin"] = true;
-              header("Location: http://localhost/blog/admin");
+              header("Location: http://localhost/blog/admin/articles");
             } else {
               header("Location: http://localhost/blog/");
             }

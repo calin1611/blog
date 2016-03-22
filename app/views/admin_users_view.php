@@ -1,6 +1,6 @@
-<h1>Admin Page</h1>
+<h1>Users</h1>
 
-<table class="table table-hover" id="articlesTbl">
+<table class="table table-hover" id="usersTbl">
 </table>
 
 <form id="articleForm" onsubmit="return false;">
@@ -22,5 +22,4 @@
     <input class="btn btn-default" type="submit" value="Save">
     <input class="btn btn-danger" type="button" value="RESET">
   </div>
-  <!-- <div><button id="resetForm">Reset Form</button></div> -->
 </form>
