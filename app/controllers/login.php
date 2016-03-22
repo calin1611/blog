@@ -23,7 +23,6 @@
 
           $loginModel = new LoginModel();
           $result = $loginModel->checkCredentials($credentials);
-          var_dump($result);
           if ($result) {
             // echo "MERGE!";
             $_SESSION["logged"] = $_POST["username"];
