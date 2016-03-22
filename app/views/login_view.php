@@ -2,8 +2,8 @@
 
 
 <?php //show errors
-    if ($loginModel->error != "") {
-        echo "<div class=\"alert alert-danger\">" . $loginModel->error . "</div>";
+    if ($this->error != "") {
+        echo "<div class=\"alert alert-danger\">" . $this->error . "</div>";
     }
 
 
@@ -20,6 +20,6 @@
         <input type="password" name="password" class="form-control" placeholder="Password">
     </div>
 
-    <input type="submit" name="submit" class="btn btn-lg btn-primary" value="Login">
+    <input type="submit" name="login" class="btn btn-lg btn-primary" value="Login">
 
 </form>
