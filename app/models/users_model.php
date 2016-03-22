@@ -3,7 +3,7 @@
 
   class UsersModel extends DB {
     function getAll() {
-      $statement = $this->executeQuery("SELECT * FROM users ORDER BY `users`.`id` ASC");
+      $statement = $this->executeQuery("SELECT id, username, class FROM users ORDER BY `users`.`id` ASC");
       return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -23,10 +23,10 @@
     }
 
     function insertArticle($article) {
-        $query = "INSERT INTO users (title, body, user_id) VALUES (:title, :body, :user_id);";
-        $queryParameters = array(':title' => $article["title"] , ':body' => $article["body"], ':user_id' => $article["user_id"]);
-        $this->executeQueryNamedParameters($query, $queryParameters);
-        return $this->db->lastInsertId();
+      $query = "INSERT INTO users (title, body, user_id) VALUES (:title, :body, :user_id);";
+      $queryParameters = array(':title' => $article["title"] , ':body' => $article["body"], ':user_id' => $article["user_id"]);
+      $this->executeQueryNamedParameters($query, $queryParameters);
+      return $this->db->lastInsertId();
     }
 
     function updateArticle($article) {
@@ -34,7 +34,26 @@
       return $statement->rowCount();
     }
 
-    function deleteArticle($article) {
-      $this->executeQuery("DELETE FROM users WHERE id =" . $article["id"]);
+    function deleteUser($user) {
+      $query = "DELETE FROM users WHERE id = :id";
+      $queryParameters = array("id" => $user["id"]);
+      $this->executeQueryNamedParameters($query, $queryParameters);
+      // $this->executeQuery("DELETE FROM users WHERE id =" . $user["id"]);
+    }
+
+    function mkAdmin($userId){
+      $query = "UPDATE users SET class = 'admin' WHERE id = :id";
+      $queryParameters = array(':id'=>$userId['id']);
+      $this->executeQueryNamedParameters($query, $queryParameters);
+
+      return $this->db->lastInsertId();
+    }
+
+    function mkUser($userId){
+      $query = "UPDATE users SET class = 'user' WHERE id = :id";
+      $queryParameters = array(':id'=>$userId['id']);
+      $this->executeQueryNamedParameters($query, $queryParameters);
+
+      return $this->db->lastInsertId();
     }
   }

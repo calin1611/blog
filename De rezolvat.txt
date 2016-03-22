@@ -1,4 +1,3 @@
-articole pending
 aprobare de comentarii,
 raspuns la comentarii (reply)
 paginare cu local storage
@@ -8,3 +7,10 @@ Vizualizare utilizatori
 profil utilizatori
 formatare data postare articol
 Poze la articole
+operatiuni in lot pe articole/comentarii/useri
+landing page pentru admin
+curatare modele
+generare id-uri random pentru utilizatori si articole
+
+--------Rezolvat--------
+articole pending
