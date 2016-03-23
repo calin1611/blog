@@ -1,12 +1,10 @@
 <h1>Login</h1>
 
 
-<?php //show errors
-    if ($this->error != "") {
-        echo "<div class=\"alert alert-danger\">" . $this->error . "</div>";
+<?php //show messages
+    if ($this->message != "") {
+      echo "<div class='alert alert-" . $this->message . "</div>";
     }
-
-
 ?>
 
 <form method="post">

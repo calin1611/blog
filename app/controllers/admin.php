@@ -5,7 +5,7 @@
   class Admin {
 
     function index() {
-      if ($_SESSION["admin"]) {
+      if (array_key_exists("admin", $_SESSION)) {
         header('Location: http://localhost/blog/admin/articles');
       } else {
         $title = "Restricted page";

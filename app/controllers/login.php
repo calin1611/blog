@@ -3,42 +3,48 @@
 
   class Login {
 
-    public $error;
-    function index() {
+    public $message;
 
-      if (isset($_POST["login"])) {
+    function index() {
+      if (array_key_exists("login", $_POST)) {
         $this->login();
       }
 
       $pageContent = VIEWS . "login_view.php";
       $title = "Login";
       include VIEWS . "layout_view.php";
-
     }
 
     function login(){
-      if (isset($_POST["login"])) {
+      if (array_key_exists("login", $_POST)) {
         if (!empty($_POST["username"]) && (!empty($_POST["password"]))) {
           $credentials = array('username' => $_POST["username"], 'password' => $_POST["password"]);
 
           $loginModel = new LoginModel();
           $result = $loginModel->checkCredentials($credentials);
-          if ($result) {
-            // echo "MERGE!";
-            $_SESSION["logged"] = $_POST["username"];
-            $_SESSION["id"] = $result["id"];
 
-            if ($result['class'] == "admin") {
-              $_SESSION["admin"] = true;
-              header("Location: http://localhost/blog/admin/articles");
-            } else {
-              header("Location: http://localhost/blog/");
-            }
+          if ($result["status"] == 'ok') {
+
+            //Parola corecta => logare user
+              $_SESSION["logged"] = $_POST["username"];
+
+              if ($result['class'] == "admin") {
+                $_SESSION["admin"] = true;
+                header("Location: http://localhost/blog/admin/articles");
+              } else {
+                header("Location: http://localhost/blog/");
+              }
+
+          } elseif ($result["status"] == 'wrong password') {
+            $this->message = "danger'>Wrong username or password.<br>";
+            //nici un rezultat
+            //nu exista userul, propunere de inregistrare.
           } else {
-            $this->error = "Wrong username or password.<br>";
+            $this->message = "info'>Would you like to <a href='#'><b>sign up</b></a>?<br>";
           }
+
         } else {
-          $this->error = "Please fill the login form.<br>";
+          $this->message = "danger'>Please fill the login form.<br>";
         }
       }
     }
