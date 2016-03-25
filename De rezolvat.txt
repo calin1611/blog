@@ -16,4 +16,28 @@ afisare comentarii in AdminZone
 session_destroy() mai bun
 
 --------Rezolvat--------
+articole pendingaprobare de comentarii,
+raspuns la comentarii (reply)
+paginare cu local storage
+infrumusetare comentarii 
+Stocarea utilizatorilor in BDD (Hash la parola)
+Vizualizare utilizatori
+profil utilizatori
+formatare data postare articol
+Poze la articole
+operatiuni in lot pe articole/comentarii/useri
+landing page pentru admin
+curatare modele
+generare id-uri random pentru utilizatori si articole
+trimitere catre articole si useri din admin
+afisare comentarii in AdminZone
+session_destroy() mai bun
+folosire de tokenuri pentru operatiuni permanente (delete, update)
+
+--------Rezolvat--------
 articole pending
+
+
+
+--------Nu merge--------
+Postarea de articole
