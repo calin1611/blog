@@ -26,8 +26,15 @@
           $userExists['status'] = "wrong password";
           return $userExists;
         } else {
-          return $suggestSignup = array('status' => 'suggest signup' );
+          return $suggestSignup = array('status' => 'user nonexistent' );
         }
       }
+    }
+
+    function createUser($credentials){
+      $query = "INSERT INTO users (username, password, class) VALUES (:username, :password, :class);";
+      $queryParameters = array(':username' => $credentials["username"] , ':password' => $credentials["password"], ':class' => 'user');
+      $this->executeQueryNamedParameters($query, $queryParameters);
+      return $this->db->lastInsertId();
     }
   }

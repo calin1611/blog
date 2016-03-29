@@ -6,7 +6,7 @@
       echo "<div class='alert alert-" . $this->message . "</div>";
     }
 ?>
-
+<p>New user? Sign up <a href="http://localhost/blog/signup">here</a>.</p><br>
 <form method="post">
     <div class="form-group">
         <label for="username">Username</label>

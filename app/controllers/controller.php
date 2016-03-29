@@ -7,6 +7,7 @@
         "article" => array("path" => "article.php", "class" => "Article"),
         "contact" => array("path" => "contact.php", "class" => "Contact"),
         "login" => array("path" => "login.php", "class" => "Login"),
+        "signup" => array("path" => "signup.php", "class" => "Signup"),
         "admin" => array("path" => "admin.php", "class" => "Admin"),
         "post" => array("path" => "post.php", "class" => "Post")
       );

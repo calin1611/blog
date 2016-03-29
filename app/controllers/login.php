@@ -6,6 +6,10 @@
     public $message;
 
     function index() {
+      if (array_key_exists("logged", $_SESSION)) {
+        header("Location: http://localhost/blog/");
+      }
+
       if (array_key_exists("login", $_POST)) {
         $this->login();
       }
@@ -27,6 +31,7 @@
 
             //Parola corecta => logare user
               $_SESSION["logged"] = $_POST["username"];
+              $_SESSION['id'] = $result['id'];
 
               if ($result['class'] == "admin") {
                 $_SESSION["admin"] = true;
@@ -40,7 +45,7 @@
             //nici un rezultat
             //nu exista userul, propunere de inregistrare.
           } else {
-            $this->message = "info'>Would you like to <a href='#'><b>sign up</b></a>?<br>";
+            $this->message = "info'>This user does not exist. Would you like to <a href='http://localhost/blog/signup'><b>sign up</b></a>?<br>";
           }
 
         } else {
