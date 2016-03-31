@@ -91,17 +91,18 @@ $( document ).ready(function() {
             getArticles();
           }
         });
-      } else {
-       $.ajax({
-         url: "http://localhost/blog/admin/addArticle",
-         data: articleForm.serialize(),
-         method: 'POST',
-         success: function(data) {
-           articleForm[0].reset();
-           getArticles();
-         }
-       });
-     }
+      }
+    //    else {
+    //    $.ajax({
+    //      url: "http://localhost/blog/admin/addArticle",
+    //      data: articleForm.serialize(),
+    //      method: 'POST',
+    //      success: function(data) {
+    //        articleForm[0].reset();
+    //        getArticles();
+    //      }
+    //    });
+    //  }
   });
 
 

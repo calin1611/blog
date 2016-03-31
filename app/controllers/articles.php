@@ -10,9 +10,9 @@ class Articles {
 
     $this->allArticles = $articles;
 
-    require MODELS . "comments_model.php";
-    $commentsModel = new CommentsModel();
-    $comments = $commentsModel->getAll();
+    // require MODELS . "comments_model.php";
+    // $commentsModel = new CommentsModel();
+    // $comments = $commentsModel->getAll();
 
 
     //De verificat aici

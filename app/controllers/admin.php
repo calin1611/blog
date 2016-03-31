@@ -7,21 +7,26 @@
     function index() {
       if ($_SESSION["admin"]) {
         header('Location: http://localhost/blog/admin/articles');
+        // var_dump($_FILES);
       } else {
+
         $title = "Restricted page";
         $pageContent = VIEWS . "restricted_view.php";
-        include VIEWS . "layout_view.php";      }
+        include VIEWS . "layout_view.php";
+      }
     }
 
     function articles() {
       if ($_SESSION["admin"]) {
+
         $pageContent = VIEWS . "admin_articles_view.php";
         $title = "Articles - AdminZone";
         include VIEWS . "layout_view.php";
       } else {
         $title = "Restricted page";
         $pageContent = VIEWS . "restricted_view.php";
-        include VIEWS . "layout_view.php";      }
+        include VIEWS . "layout_view.php";
+      }
     }
 
     function users() {
@@ -89,18 +94,35 @@
     }
 
     function addArticle() {
-      header('Content-Type: application/json');
+      // header('Content-Type: application/json');
 
       if ((isset($_POST['title']) && !empty($_POST['title'])) && (isset($_POST['body']) && !empty($_POST['body']))) {
         $article["title"] = $_POST['title'];
         $article["body"] = $_POST['body'];
         $article["user_id"] = $_SESSION['id'];
 
-        $articlesModel = new ArticlesModel();
+        $fileName = md5($_FILES['file']['size']);
+        var_dump($_FILES);
+        move_uploaded_file($_FILES['file']['tmp_name'], UPLOADS.$fileName);
+        $article["image"] = $fileName;
 
+        $articlesModel = new ArticlesModel();
         $result = $articlesModel->insertArticle($article);
+
+        // $fileName = hash_file('md5', $_FILES['file']['size']);
         echo json_encode($result);
+      } else {
+        echo "Z";
       }
+    }
+
+    function download() {
+
+      $file_url = UPLOADS . $_GET['file'];
+      header('Content-Type: application/octet-stream');
+      header("Content-Transfer-Encoding: Binary");
+      header("Content-disposition: attachment; filename=\"" . basename($file_url) . "\"");
+      readfile($file_url); // do the double-download-dance (dirty but worky)
     }
 
     function deleteArticle() {

@@ -3,7 +3,7 @@
 <table class="table table-hover" id="articlesTbl">
 </table>
 
-<form id="articleForm" onsubmit="return false;">
+<form id="articleForm" action="http://localhost/blog/admin/addArticle" method="POST" enctype="multipart/form-data">
   <div>
     <input type="hidden" name="id">
   </div>
@@ -19,8 +19,18 @@
   </div>
 
   <div>
+    <label for="file">File</label>
+    <input type="file" name="file" />
+  </div>
+
+  <div>
     <input class="btn btn-default" type="submit" value="Save">
     <input class="btn btn-danger" type="button" value="RESET">
   </div>
   <!-- <div><button id="resetForm">Reset Form</button></div> -->
 </form>
+
+<?php
+// var_dump($_FILES);
+// var_dump($GLOBALS);
+ ?>

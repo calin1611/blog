@@ -7,5 +7,7 @@
     define("CSS", "public/css/");
     define("MODELS", "app/models/");
 
+    define("UPLOADS", "uploads/");
+
     require "app/controllers/controller.php";
     $articles = new Controller();

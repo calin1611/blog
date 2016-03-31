@@ -25,6 +25,9 @@
       $page = "articles";
       $controller = $segments[1];
       $method = empty($segments[2]) ? "" : $segments[2];
+      // var_dump($segments);
+      // echo $method;
+      // exit;
       if(!empty($controller) && $controller != "index.php") {
         if (array_key_exists($controller, $pages)) {
           $page = $controller;
