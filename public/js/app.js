@@ -8,9 +8,9 @@ $( document ).ready(function() {
           table += '<tr><td>' + data[i].title + '</td>';
           table += '<td class="buttons-td">';
             if (data[i].status === "pending") {
-              table += '<button class="btn btn-success admin-btn" data-approve-id="' + data[i].id + '"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>';
+              table += '<button class="btn btn-success admin-btn" data-approve-id="' + data[i].id + '" title="Approve article"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>';
             } else if (data[i].status === "approved") {
-              table += '<button class="btn btn-warning admin-btn" data-unapprove-id="' + data[i].id + '"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>';
+              table += '<button class="btn btn-warning admin-btn" data-unapprove-id="' + data[i].id + '" title="Unapprove article"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>';
             }
             table += '<button class="btn btn-default admin-btn" data-edit-id="' + data[i].id + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>';
             table += '<button class="btn btn-danger admin-btn" data-delete-id="' + data[i].id + '"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>';
@@ -165,5 +165,5 @@ $( document ).ready(function() {
         }
       });
     });
-    
+
 });
