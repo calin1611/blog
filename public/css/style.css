@@ -34,3 +34,8 @@ table td {
   text-decoration: none;
   color: black;
 }
+
+.admin-landingPage-buttons {
+  font-size: 30px;
+  height: 60px;
+}

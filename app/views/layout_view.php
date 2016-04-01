@@ -54,7 +54,7 @@
               </ul>
             </div>
             <?php } else { ?>
-              <a href='http://localhost/blog/login'><button type='button' class='btn btn-info'>Log in</button></a>
+              <a href='http://localhost/blog/login'><button type='button' class='btn btn-info'>Log in / Sign up</button></a>
             <?php  } ?>
 
           </ul>
@@ -67,8 +67,9 @@
 
       <?php
         include $pageContent;
-        var_dump($_SESSION);
-        echo session_id();
+
+        // var_dump($_SERVER);
+        // echo session_id();
       ?>
 
     </div>
@@ -79,6 +80,17 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<?php echo BASE_URL; ?>public/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
     <script src="<?php echo BASE_URL; ?>public/js/pagination.js"></script>
-    <script src="<?php echo BASE_URL; ?>public/js/app.js"></script>
+
+    <?php
+      $mystring = $_SERVER['PATH_INFO'];
+      $findme   = 'admin';
+      $pos = strpos($mystring, $findme);
+      if ($pos != false) { ?>
+        <script src="<?php echo BASE_URL; ?>public/js/app.js"></script>
+    <?php } ?>
+
+    <?php if ($title == 'Signup') { ?>
+      <script src="<?php echo BASE_URL; ?>public/js/signup.js"></script>
+    <?php } ?>
   </body>
 </html>

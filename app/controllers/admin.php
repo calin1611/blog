@@ -5,8 +5,11 @@
   class Admin {
 
     function index() {
-      if ($_SESSION["admin"]) {
-        header('Location: http://localhost/blog/admin/articles');
+      if (array_key_exists("admin", $_SESSION)) {
+        $title = "AdminZone";
+        $pageContent = VIEWS . "admin_landingPage_view.php";
+        // header('Location: http://localhost/blog/admin/articles');
+        include VIEWS . "layout_view.php";
       } else {
         $title = "Restricted page";
         $pageContent = VIEWS . "restricted_view.php";

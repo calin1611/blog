@@ -1,14 +1,12 @@
 <h1>Login</h1>
 
 
-<?php //show errors
-    if ($loginModel->error != "") {
-        echo "<div class=\"alert alert-danger\">" . $loginModel->error . "</div>";
+<?php //show messages
+    if ($this->message != "") {
+      echo "<div class='alert alert-" . $this->message . "</div>";
     }
-
-
 ?>
-
+<p>New user? Sign up <a href="http://localhost/blog/signup">here</a>.</p><br>
 <form method="post">
     <div class="form-group">
         <label for="username">Username</label>
@@ -20,6 +18,6 @@
         <input type="password" name="password" class="form-control" placeholder="Password">
     </div>
 
-    <input type="submit" name="submit" class="btn btn-lg btn-primary" value="Login">
+    <input type="submit" name="login" class="btn btn-lg btn-primary" value="Login">
 
 </form>

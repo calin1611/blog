@@ -1,19 +1,17 @@
 aprobare de comentarii,
 raspuns la comentarii (reply)
 paginare cu local storage
-infrumusetare comentarii 
-Stocarea utilizatorilor in BDD (Hash la parola)
-Vizualizare utilizatori
+infrumusetare comentarii
 profil utilizatori
 formatare data postare articol
 Poze la articole
 operatiuni in lot pe articole/comentarii/useri
-landing page pentru admin
 curatare modele
 generare id-uri random pentru utilizatori si articole
 trimitere catre articole si useri din admin
 afisare comentarii in AdminZone
 session_destroy() mai bun
+<<<<<<< HEAD
 
 --------Rezolvat--------
 articole pendingaprobare de comentarii,
@@ -36,8 +34,21 @@ folosire de tokenuri pentru operatiuni permanente (delete, update)
 
 --------Rezolvat--------
 articole pending
+=======
+folosire de tokenuri pentru operatiuni permanente (delete, update)
+Stocarea utilizatorilor in BDD (Hash la parola)
+
+--------Rezolvat--------
+articole pending
+Vizualizare utilizatori
+landing page pentru admin
+>>>>>>> refs/remotes/origin/JS-signup
 
 
 
 --------Nu merge--------
+<<<<<<< HEAD
 Postarea de articole
+=======
+Postarea de articole
+>>>>>>> refs/remotes/origin/JS-signup
