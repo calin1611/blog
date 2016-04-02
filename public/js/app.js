@@ -1,3 +1,4 @@
+window.baseURL = 'http://localhost/blog/';
 $( document ).ready(function() {
   function getArticles() {
     $.ajax({
@@ -5,7 +6,7 @@ $( document ).ready(function() {
       success: function(data) {
         var table = '';
         for (var i=0; i<data.length; i++) {
-          table += '<tr id="row-' + data[i].id + '"><td class="title-td">' + data[i].title + '</td>';
+          table += '<tr id="row-' + data[i].id + '"><td class="title-td"><a href="' + window.baseURL + 'article?id=' + data[i].id + '">' + data[i].title + '</a></td>';
           table += '<td class="buttons-td">';
             if (data[i].status === "pending") {
               table += '<button class="btn btn-success admin-btn appr-unappr"  data-approve-id="' + data[i].id + '" data-toggle="tooltip" data-placement="left" title="Approve article"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>';
