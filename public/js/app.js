@@ -5,14 +5,14 @@ $( document ).ready(function() {
       success: function(data) {
         var table = '';
         for (var i=0; i<data.length; i++) {
-          table += '<tr><td>' + data[i].title + '</td>';
+          table += '<tr id="row-' + data[i].id + '"><td class="title-td">' + data[i].title + '</td>';
           table += '<td class="buttons-td">';
             if (data[i].status === "pending") {
-              table += '<button class="btn btn-success admin-btn" data-approve-id="' + data[i].id + '" title="Approve article"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>';
+              table += '<button class="btn btn-success admin-btn appr-unappr"  data-approve-id="' + data[i].id + '" data-toggle="tooltip" data-placement="left" title="Approve article"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>';
             } else if (data[i].status === "approved") {
-              table += '<button class="btn btn-warning admin-btn" data-unapprove-id="' + data[i].id + '" title="Unapprove article"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>';
+              table += '<button class="btn btn-warning admin-btn appr-unappr" data-unapprove-id="' + data[i].id + '" data-toggle="tooltip" data-placement="left" title="Unapprove article"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>';
             }
-            table += '<button class="btn btn-default admin-btn" data-edit-id="' + data[i].id + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>';
+            table += '<button class="btn btn-default admin-btn"  data-edit-id="' + data[i].id + '" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>';
             table += '<button class="btn btn-danger admin-btn" data-delete-id="' + data[i].id + '"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>';
           table += '</td></tr>';
         }
@@ -25,8 +25,13 @@ $( document ).ready(function() {
 
   getArticles();
 
+  $('#articlesTbl').on('mouseenter', '.appr-unappr', function() {
+    // console.log($(this).data('edit-id'));
+    console.log(this);
+    $(this).tooltip('show');
+  });
+
   $('#articlesTbl').on('click', '[data-edit-id]', function() {
-    //console.log($(this).data('edit-id'));
     $.ajax({
       url: "http://localhost/blog/admin/getArticle/?id=" + $(this).data('edit-id'),
       method: "PUT",
@@ -38,6 +43,38 @@ $( document ).ready(function() {
       }
     });
   });
+
+  $('input[type=submit]').on('click', function() {
+    var articleForm = $('#articleForm');
+      if($('input[name=id]').val() !== '') {
+        $.ajax({
+          url: "http://localhost/blog/admin/updateArticle",
+          data: articleForm.serialize(),
+          type: 'json',
+          method: 'POST',
+          success: function(data) {
+            // articleForm[0].reset();
+            $('#myModal').modal('hide');
+            getArticles();
+          }
+        });
+      } else {
+       $.ajax({
+         url: "http://localhost/blog/admin/addArticle",
+         data: articleForm.serialize(),
+         method: 'POST',
+         success: function(data) {
+           articleForm[0].reset();
+           getArticles();
+         }
+       });
+     }
+  });
+
+  $('input[type=button]').on('click', function() {
+    $('#articleForm [name]').val('');
+  });
+
 
   $('#articlesTbl').on('click', '[data-approve-id]', function() {
     console.log($(this).data('approve-id'));
@@ -74,35 +111,7 @@ $( document ).ready(function() {
     });
   });
 
-  $('input[type=button]').on('click', function() {
-    $('#articleForm [name]').val('');
-  });
 
-  $('input[type=submit]').on('click', function() {
-    var articleForm = $('#articleForm');
-      if($('input[name=id]').val() !== '') {
-        $.ajax({
-          url: "http://localhost/blog/admin/updateArticle",
-          data: articleForm.serialize(),
-          type: 'json',
-          method: 'POST',
-          success: function(data) {
-            articleForm[0].reset();
-            getArticles();
-          }
-        });
-      } else {
-       $.ajax({
-         url: "http://localhost/blog/admin/addArticle",
-         data: articleForm.serialize(),
-         method: 'POST',
-         success: function(data) {
-           articleForm[0].reset();
-           getArticles();
-         }
-       });
-     }
-  });
 
 
 //-----------------------USERS-----------------------
@@ -131,39 +140,42 @@ $( document ).ready(function() {
   getUsers();
 
 
-    $('#usersTbl').on('click', '[data-mkadmin-id]', function() {
-      console.log($(this).data('mkadmin-id'));
-      $.ajax({
-        url: "http://localhost/blog/admin/mkAdmin/?id=" + $(this).data('mkadmin-id'),
-        method: "POST",
-        success: function( data ) {
-          console.log(data);
-          getUsers();
-        }
-      });
+  $('#usersTbl').on('click', '[data-mkadmin-id]', function() {
+    console.log($(this).data('mkadmin-id'));
+    $.ajax({
+      url: "http://localhost/blog/admin/mkAdmin/?id=" + $(this).data('mkadmin-id'),
+      method: "POST",
+      success: function( data ) {
+        console.log(data);
+        getUsers();
+      }
     });
+  });
 
-    $('#usersTbl').on('click', '[data-mkuser-id]', function() {
-      console.log($(this).data('mkuser-id'));
-      $.ajax({
-        url: "http://localhost/blog/admin/mkUser/?id=" + $(this).data('mkuser-id'),
-        method: "POST",
-        success: function( data ) {
-          console.log(data);
-          getUsers();
-        }
-      });
+  $('#usersTbl').on('click', '[data-mkuser-id]', function() {
+    console.log($(this).data('mkuser-id'));
+    $.ajax({
+      url: "http://localhost/blog/admin/mkUser/?id=" + $(this).data('mkuser-id'),
+      method: "POST",
+      success: function( data ) {
+        console.log(data);
+        getUsers();
+      }
     });
+  });
 
-    $('#usersTbl').on('click', '[data-delete-id]', function() {
-      $.ajax({
-        url: "http://localhost/blog/admin/deleteUser/?id=" + $(this).data('delete-id'),
-        method: "DELETE",
-        data: {id: $(this).data("delete-id")},
-        success: function( data ) {
-          getUsers();
-        }
-      });
+  $('#usersTbl').on('click', '[data-delete-id]', function() {
+    $.ajax({
+      url: "http://localhost/blog/admin/deleteUser/?id=" + $(this).data('delete-id'),
+      method: "DELETE",
+      data: {id: $(this).data("delete-id")},
+      success: function( data ) {
+        getUsers();
+      }
     });
+  });
+
+
+
 
 });

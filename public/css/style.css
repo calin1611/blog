@@ -39,3 +39,7 @@ table td {
   font-size: 30px;
   height: 60px;
 }
+
+.title-td {
+  vertical-align: middle;
+}

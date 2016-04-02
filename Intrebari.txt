@@ -1,12 +1,13 @@
 
 ----------INTREBARI----------
 
--notice-uri de la xDebug. Se mai poate taia din ele?
--cum fac sa imi centrez datele in tabel?
-
+-.title-td Cum fac sa imi accepte clasa asta Bootstrap? Vreau sa aliniez la mijloc textul in celule la tabel
 -PUT si DELETE la ajax. Cum functioneaza? Vreau sa fac approve article prin PUT.
 -Daca se acceseaza din browser linkul asta, un utilizator e automat transformat in admin. cum se poate evita asta? Ar merge daca as compara valoarea de pe cookieul PHPSESID cu valoarea returnata de session_id()?
-  http://localhost/blog/admin/mkAdmin/?id=X
+http://localhost/blog/admin/mkAdmin/?id=X
+
+-notice-uri de la xDebug. Se mai poate taia din ele?
+-cum fac sa imi centrez datele in tabel?
 -
 
 

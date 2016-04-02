@@ -92,5 +92,7 @@
     <?php if ($title == 'Signup') { ?>
       <script src="<?php echo BASE_URL; ?>public/js/signup.js"></script>
     <?php } ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL.CSS; ?>style.css">
+    
   </body>
 </html>
