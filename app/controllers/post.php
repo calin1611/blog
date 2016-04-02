@@ -22,12 +22,13 @@ class Post {
       $article["title"] = $_POST['title'];
       $article["body"] = $_POST['body'];
       $article["user_id"] = $_SESSION['id'];
+      $article["image"] = $_POST['file'];
 
       $articlesModel->insertArticle($article);
 
-      header("Location: http://localhost/blog/post?success=true");
+      // header("Location: http://localhost/blog/post?success=true");
     } else {
-      header("Location: http://localhost/blog/post?success=false");
+      // header("Location: http://localhost/blog/post?success=false");
     }
   }
 
