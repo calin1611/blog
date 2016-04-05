@@ -25,15 +25,19 @@ class Post {
 
       if (!empty($_FILES["file"])) {
         $fileName = $_FILES["file"]['name'];
-        $fileSize = $_FILES["file"]['size'];
-
         $ext = pathinfo($fileName, PATHINFO_EXTENSION);
 
-        move_uploaded_file($_FILES["file"]["tmp_name"], UPLOADS.$fileName);
-        $fileNameHashed = md5_file(UPLOADS.$fileName) . '.' . $ext;
-        rename(UPLOADS.$fileName, UPLOADS.$fileNameHashed);
+        if (($ext == 'jpg') || ($ext == 'jpeg') || ($ext == 'png') || ($ext == 'gif')) {
+          move_uploaded_file($_FILES["file"]["tmp_name"], UPLOADS.$fileName);
+          $fileNameHashed = md5_file(UPLOADS.$fileName) . '.' . $ext;
+          rename(UPLOADS.$fileName, UPLOADS.$fileNameHashed);
+          $article["image"] = $fileNameHashed;
+        } else {
+          http_response_code(500);
+          echo "wrong filetype";
+          return;
+        }
       }
-      $article["image"] = $fileNameHashed;
 
       $articlesModel->insertArticle($article);
 

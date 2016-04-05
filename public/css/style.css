@@ -49,6 +49,7 @@ table td {
 }
 
 #previewing{
+  border-radius: 5px;
   max-height: 300px;
   text-align: center;
 }

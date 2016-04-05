@@ -19,8 +19,6 @@ $('document').ready(function(e) {
       window.uploadedFile = e.target.result;
     };
 
-    // Set loading text
-
     $.ajax({
       xhr: function(){
         $('.progress').toggleClass('hidden');
@@ -45,11 +43,16 @@ $('document').ready(function(e) {
         status.addClass('alert alert-success animated fadeIn').html("<b>Success!</b> The article has been submitted for approval.<br> Would you like to <a href='http://localhost/blog/post'>post a new article</a>?");
         $(".progress").addClass('animated fadeOut');
       },
-      error: function () {
-        var status = $('#status');
-        status.removeClass();
-        status.addClass('alert alert-danger animated fadeIn').html("<b>ERROR</b>: Please fill in the form.");
-        console.error('FAILED!');
+      error: function (resp) {
+        if (resp.responseText === 'wrong filetype') {
+          var status = $('#status');
+          status.removeClass();
+          status.addClass('alert alert-warning animated fadeIn').html("<b>Warning</b>: Please upload pictures only (.gif, .png, .jpg)");
+        } else {
+          var status = $('#status');
+          status.removeClass();
+          status.addClass('alert alert-danger animated fadeIn').html("<b>ERROR</b>: Please fill in the form.");
+        }
       }
     });
   });
@@ -57,10 +60,8 @@ $('document').ready(function(e) {
   $('#file').on('change', function (e) {
     var fileName = e.target.value;
     if ((fileName.indexOf('.gif') !== -1) || (fileName.indexOf('.jpg') !== -1) || (fileName.indexOf('.jpeg') !== -1) || (fileName.indexOf('.png') !== -1)) {
-      console.log('Tăt îi bine.');
       $('.submit').attr('disabled', false);
     } else {
-      console.log('Please upload an IMAGE');
       var status = $('#status');
       status.removeClass();
       status.addClass('alert alert-warning animated fadeIn').html("<b>Warning</b>: Please upload pictures only (.gif, .png, .jpg)");
