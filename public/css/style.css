@@ -44,6 +44,20 @@ table td {
   vertical-align: middle;
 }
 
+#image_preview{
+  text-align:center;
+}
+
 #previewing{
   max-height: 300px;
+  text-align: center;
+}
+
+.progress-bar {
+  width: 0;
+}
+
+#submit {
+  margin-top: 30px;
+  font-size: 2em;
 }

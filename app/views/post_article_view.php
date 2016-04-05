@@ -17,16 +17,13 @@
     <!-- <label id="file-validation">Please upload only .gif .jpg .png files</label> -->
   </div>
 
-  <h4 id='loading' >Loading...</h4>
-  <div class="progress">
-    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:10%">
-      <span class="sr-only">70% Complete</span>
-    </div>
+  <div class="progress hidden">
+    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
   </div>
 
   <div id="image_preview"><img id="previewing" src="" /></div>
 
-  <input type="submit" name="submit" value="Post" class="btn btn-primary">
+  <input type="submit" name="submit" value="Post article" class="btn btn-primary col-md-6 col-md-offset-3" id='submit'>
 </form>
 
 
