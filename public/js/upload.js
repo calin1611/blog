@@ -30,6 +30,7 @@ $('document').ready(function(e) {
           }
         });
         return xhr;
+
       },
       url: 'http://localhost/blog/post/postArticle',
       type: 'POST',
@@ -42,6 +43,11 @@ $('document').ready(function(e) {
         status.removeClass();
         status.addClass('alert alert-success animated fadeIn').html("<b>Success!</b> The article has been submitted for approval.<br> Would you like to <a href='http://localhost/blog/post'>post a new article</a>?");
         $(".progress").addClass('animated fadeOut');
+
+        //Clear form
+        $('#title').val('');
+        $('#body').val('');
+        $('#file').val('');
       },
       error: function (resp) {
         if (resp.responseText === 'wrong filetype') {
