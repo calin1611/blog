@@ -11,3 +11,9 @@
   </div>
 
 </div>
+
+<!-- Js scripts insertion -->
+<?php
+  $jsScripts = array("<script src='" . BASE_URL . JS ."pagination.js'></script>");
+  $jsScriptsLength = count($jsScripts)
+?>

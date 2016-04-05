@@ -79,20 +79,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<?php echo BASE_URL; ?>public/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
-    <script src="<?php echo BASE_URL; ?>public/js/pagination.js"></script>
 
+<!-- Js scripts insertion -->
     <?php
-      $mystring = $_SERVER['PATH_INFO'];
-      $findme   = 'admin';
-      $pos = strpos($mystring, $findme);
-      if ($pos != false) { ?>
-        <script src="<?php echo BASE_URL; ?>public/js/app.js"></script>
-    <?php } ?>
+      if (isset($jsScripts) && !empty($jsScripts)) {
+        for ($i=0; $i < $jsScriptsLength; $i++) {
+          echo $jsScripts[$i];
+        }
+      }
+    ?>
 
-    <?php if ($title == 'Signup') { ?>
-      <script src="<?php echo BASE_URL; ?>public/js/signup.js"></script>
-    <?php } ?>
-    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL.CSS; ?>style.css">
-    
   </body>
 </html>

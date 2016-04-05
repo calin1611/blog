@@ -3,12 +3,23 @@ $('document').ready(function(e) {
     e.preventDefault();
 
     // Varianta 1
-    // var myForm = $('#uploadimage');
+    var myForm = $('#postForm');
     // var dataToSend = new FormData(myForm[0]);
 
     // Varianta 2
     var dataToSend = new FormData();
     dataToSend.append("file",file.files[0]);
+
+    var formTitle = $("#postForm")[0].title.value;
+    // dataToSend.append("title",formTitle);
+
+    var formBody = $("#postForm")[0].body.value;
+    // dataToSend.append("body",formBody);
+
+    var arr = $("#postForm").serializeArray();
+    dataToSend.append("title",arr[0].value);
+    dataToSend.append("body",arr[1].value);
+
 
     // Read the uploaded file
     var reader = new FileReader();
@@ -38,8 +49,15 @@ $('document').ready(function(e) {
       contentType: false, //ALWAYS false when uploading
       success: function(resp) {
         $("#previewing").attr("src",window.uploadedFile);
+
+        // $("#title").val('');
+        // $("#body").val('');
+        $('#status').attr('class', 'alert alert-success').html("<b>Success!</b> The article has been submitted for approval.");
+
       },
       error: function () {
+        //tell the error
+        $('#status').attr('class', 'alert alert-danger').html("<b>ERROR</b>: Please fill in the form.");
         console.error('FAILED!');
       },
       complete: function () {

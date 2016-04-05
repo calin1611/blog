@@ -43,3 +43,7 @@ table td {
 .title-td {
   vertical-align: middle;
 }
+
+#previewing{
+  max-height: 300px;
+}

@@ -27,5 +27,3 @@
     <input type="submit" name="signup" class="btn btn-lg btn-primary" id="signup" value="Signup">
 
 </form>
-
-<script src="<?php echo BASE_URL; ?>public/js/signup.js"></script>
