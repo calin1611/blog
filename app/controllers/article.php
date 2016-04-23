@@ -7,9 +7,9 @@ class Article {
 
   function index() {
     $articleId = $_GET['id'];
-    $articlesModel = new ArticlesModel();
-    $usersModel = new UsersModel();
 
+    // retrieve article data
+    $articlesModel = new ArticlesModel();
     $article = $articlesModel->getArticle($articleId);
 
     $articleTitle = $article['title'];
@@ -17,22 +17,29 @@ class Article {
     $articleCreationDate = $article['creation_date'];
     $articleImageName = $article['image'];
 
+    // retrieve user (author) data
+    $usersModel = new UsersModel();
     $user = $usersModel->getUserById($article['user_id']);
+
     $articleAuthor = $user['username'];
 
+    // retrieve comments
     $commentsModel = new CommentsModel();
     $comments = $commentsModel->getComments($articleId);
 
-    $pageContent = VIEWS . "article_view.php";
-    $title = $article['title'] . " - Article";
-    include VIEWS . "layout_view.php";
 
+    // build page
+    $title = $article['title'] . " - Article";
+    $pageContent = VIEWS . "article_view.php";
+    include VIEWS . "layout_view.php";
   }
 
   function postComment(){
     $articleId = $_GET['id'];
-    
+
     $commentsModel = new CommentsModel();
+
+    // build comment
     $comment["article_id"] = $articleId;
     $comment["user"] = $_POST['name'];
     $comment["title"] = $_POST['title'];
