@@ -29,7 +29,7 @@
 
           if ($result["status"] == 'ok') {
 
-            //Parola corecta => logare user
+            //the password is correct => login user
               $_SESSION["logged"] = $_POST["username"];
               $_SESSION['id'] = $result['id'];
 
@@ -42,8 +42,8 @@
 
           } elseif ($result["status"] == 'wrong password') {
             $this->message = "danger'>Wrong username or password.<br>";
-            //nici un rezultat
-            //nu exista userul, propunere de inregistrare.
+            //no results
+            //the user does not exist; ask to signup
           } else {
             $this->message = "info'>This user does not exist. Would you like to <a href='http://localhost/blog/signup'><b>sign up</b></a>?<br>";
           }
