@@ -14,8 +14,8 @@
         $this->login();
       }
 
-      $pageContent = VIEWS . "login_view.php";
       $title = "Login";
+      $pageContent = VIEWS . "login_view.php";
       include VIEWS . "layout_view.php";
     }
 
@@ -25,22 +25,37 @@
           $credentials = array('username' => $_POST["username"], 'password' => $_POST["password"]);
 
           $loginModel = new LoginModel();
-          $result = $loginModel->checkCredentials($credentials);
 
-          if ($result["status"] == 'ok') {
+          //check if the provided username and password match
+          $credentialsCheckResult = $loginModel->checkCredentials($credentials);
+
+          if ($credentialsCheckResult != false) {
+            $status = 'ok';
+            // return $result;
+          } else {
+            // check if the username exists
+            $userExists = $loginModel->checkIfUserExists($credentials['username']);
+            if ($userExists != false) {
+              $status = 'wrong password';
+            } else {
+              $status ='user nonexistent';
+            }
+          }
+
+          if ($status == 'ok') {
 
             //the password is correct => login user
               $_SESSION["logged"] = $_POST["username"];
-              $_SESSION['id'] = $result['id'];
+              $_SESSION['id'] = $credentialsCheckResult['id'];
 
-              if ($result['class'] == "admin") {
+              if ($credentialsCheckResult['class'] == "admin") {
                 $_SESSION["admin"] = true;
                 header("Location: http://localhost/blog/admin/articles");
               } else {
                 header("Location: http://localhost/blog/");
               }
 
-          } elseif ($result["status"] == 'wrong password') {
+          } elseif ($status == 'wrong password') {
             $this->message = "danger'>Wrong username or password.<br>";
             //no results
             //the user does not exist; ask to signup

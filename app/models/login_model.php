@@ -8,6 +8,7 @@
       $queryParameters = array(':username' => $user); //, ':password' => $credentials['password']
       $statement = $this->executeQueryNamedParameters($query, $queryParameters);
       $result =  $statement->fetch(PDO::FETCH_ASSOC);
+      
       return $result;
     }
 
@@ -17,18 +18,7 @@
       $statement = $this->executeQueryNamedParameters($query, $queryParameters);
       $result =  $statement->fetch(PDO::FETCH_ASSOC);
 
-      if ($result != false) {
-        $result['status'] = "ok";
-        return $result;
-      } else {
-        $userExists = $this->checkIfUserExists($credentials['username']);
-        if ($userExists != false) {
-          $userExists['status'] = "wrong password";
-          return $userExists;
-        } else {
-          return $suggestSignup = array('status' => 'user nonexistent' );
-        }
-      }
+      return $result;
     }
 
     function createUser($credentials){
