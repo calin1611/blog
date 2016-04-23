@@ -1,4 +1,4 @@
-<h1>Articles Page</h1>
+<h1>Articles</h1>
 
 <div>
 

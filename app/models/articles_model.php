@@ -23,7 +23,7 @@
     }
 
     function getArticlesForPage($begin, $limit) {
-      $statement = $this->executeQuery('SELECT id, title, body FROM articles WHERE status = "approved" ORDER BY `articles`.`id` DESC LIMIT ' . $begin . ', ' . $limit);
+      $statement = $this->executeQuery('SELECT id, title, body, image FROM articles WHERE status = "approved" ORDER BY `articles`.`id` DESC LIMIT ' . $begin . ', ' . $limit);
       return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
