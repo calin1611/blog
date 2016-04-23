@@ -1,5 +1,5 @@
 <h1>Articles</h1>
-<?php var_dump($_SESSION); ?>
+
 <div>
 
   <div id="articleArea" class=".col-md-6"></div> <!-- Where articles appear -->
@@ -12,8 +12,8 @@
 
 </div>
 
-<!-- Js scripts insertion -->
-<?php
+
+<?php //JS scripts insertion
   $jsScripts = array("<script src='" . BASE_URL . JS ."pagination.js'></script>");
   $jsScriptsLength = count($jsScripts)
 ?>
