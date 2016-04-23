@@ -6,11 +6,14 @@
 
     function index() {
       if (array_key_exists("admin", $_SESSION)) {
+
+        // build page
         $title = "AdminZone";
         $pageContent = VIEWS . "admin_landingPage_view.php";
-        // header('Location: http://localhost/blog/admin/articles');
         include VIEWS . "layout_view.php";
+
       } else {
+        //restrict access
         $title = "Restricted page";
         $pageContent = VIEWS . "restricted_view.php";
         include VIEWS . "layout_view.php";      }
@@ -18,10 +21,14 @@
 
     function articles() {
       if ($_SESSION["admin"]) {
-        $pageContent = VIEWS . "admin_articles_view.php";
+
+        // build page
         $title = "Articles - AdminZone";
+        $pageContent = VIEWS . "admin_articles_view.php";
         include VIEWS . "layout_view.php";
+
       } else {
+        // restrict access
         $title = "Restricted page";
         $pageContent = VIEWS . "restricted_view.php";
         include VIEWS . "layout_view.php";      }
@@ -29,10 +36,14 @@
 
     function users() {
       if ($_SESSION["admin"]) {
-        $pageContent = VIEWS . "admin_users_view.php";
+
+        // build page
         $title = "Users - AdminZone";
+        $pageContent = VIEWS . "admin_users_view.php";
         include VIEWS . "layout_view.php";
+
       } else {
+        // restrict access
         $title = "Restricted page";
         $pageContent = VIEWS . "restricted_view.php";
         include VIEWS . "layout_view.php";      }
@@ -91,7 +102,7 @@
       echo json_encode($article);
     }
 
-    function addArticle() {
+    function addArticle() { // delete?
       header('Content-Type: application/json');
 
       if ((isset($_POST['title']) && !empty($_POST['title'])) && (isset($_POST['body']) && !empty($_POST['body']))) {

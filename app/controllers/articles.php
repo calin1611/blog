@@ -5,22 +5,22 @@ class Articles {
   protected $allArticles;
 
   function index() {
+
+    // retrieve articles
     $articlesModel = new ArticlesModel();
     $articles = $articlesModel->getAll();
-
     $this->allArticles = $articles;
 
+
+    // retrieve comments
     require MODELS . "comments_model.php";
     $commentsModel = new CommentsModel();
     $comments = $commentsModel->getAll();
 
-
-    //De verificat aici
-
-    $pageContent = VIEWS . "articles_view.php";
+    // build page
     $title = "Articles";
+    $pageContent = VIEWS . "articles_view.php";
     include VIEWS . "layout_view.php";
-
   }
 
   function getHtml() {

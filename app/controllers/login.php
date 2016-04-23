@@ -6,14 +6,18 @@
     public $message;
 
     function index() {
+
+      // if already logged, redirect
       if (array_key_exists("logged", $_SESSION)) {
         header("Location: http://localhost/blog/");
       }
 
+      // if the login form is submitted, access the "login" method
       if (array_key_exists("login", $_POST)) {
         $this->login();
       }
 
+      // build page
       $title = "Login";
       $pageContent = VIEWS . "login_view.php";
       include VIEWS . "layout_view.php";
@@ -31,7 +35,6 @@
 
           if ($credentialsCheckResult != false) {
             $status = 'ok';
-            // return $result;
           } else {
             // check if the username exists
             $userExists = $loginModel->checkIfUserExists($credentials['username']);
