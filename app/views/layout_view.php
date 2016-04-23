@@ -28,28 +28,36 @@
 
           <ul class="nav navbar-nav navbar-right">
 
+            <!-- Dropdown menu/Login button -->
             <?php if (isset($_SESSION['logged'])) {?>
             <div class="dropdown">
               <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 Hello, <?php echo $_SESSION['logged']; ?>
                 <span class="caret"></span>
               </button>
+
               <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <?php
-                if ($_SESSION['logged']) {
+                  //Show admin-specific links
                   if ((isset($_SESSION['admin'])) && ($_SESSION['admin'] == true)) {
                     echo '<li ';
                     if ($title == 'Articles - AdminZone') {echo "class='active'";}
                     echo '><a href="http://localhost/blog/admin/articles">Articles</a></li>';
 
                     echo '<li ';
-                    if ($title == 'Users - AdminZone') {echo "class='active'";}
+                    if ($title == 'Users - AdminZone') {echo 'class="active"';}
                     echo '><a href="http://localhost/blog/admin/users">Users</a></li>';
+
+                    echo "<li role='separator' class='divider'></li>";
                   }
+
+                  // General links
                   echo "<li><a href='http://localhost/blog/post'>Post an article</a></li>";
+                  echo "<li><a href='#'>My articles</a></li>";
+
                   echo "<li role='separator' class='divider'></li>";
+
                   echo "<li><a href='http://localhost/blog/login/logout'>Log out</a></li>";
-                }
                 ?>
               </ul>
             </div>
@@ -79,20 +87,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<?php echo BASE_URL; ?>public/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
-    <script src="<?php echo BASE_URL; ?>public/js/pagination.js"></script>
 
-    <?php
-      $mystring = $_SERVER['PATH_INFO'];
-      $findme   = 'admin';
-      $pos = strpos($mystring, $findme);
-      if ($pos != false) { ?>
-        <script src="<?php echo BASE_URL; ?>public/js/app.js"></script>
-    <?php } ?>
+    <?php // JS scripts insertion
+      if (isset($jsScripts) && !empty($jsScripts)) {
+        for ($i=0; $i < $jsScriptsLength; $i++) {
+          echo $jsScripts[$i];
+        }
+      }
+    ?>
 
-    <?php if ($title == 'Signup') { ?>
-      <script src="<?php echo BASE_URL; ?>public/js/signup.js"></script>
-    <?php } ?>
-    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL.CSS; ?>style.css">
-    
   </body>
 </html>

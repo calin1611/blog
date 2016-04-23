@@ -84,6 +84,8 @@ class Articles {
 
       $articlesOnPage = $articlesModel->getArticlesForPage($start, $per_page);
       foreach ($articlesOnPage as $value) {
+
+        //Cropping the body of the article
         if (strlen($value["body"]) > 95){
           $croppedBody = substr($value["body"], 0, strpos(wordwrap($value["body"], 100), "\n"));
         } else {
@@ -91,10 +93,31 @@ class Articles {
         }
 
         if (strlen($croppedBody) < strlen($value["body"])){
-          $articleList .= '<a href="http://localhost/blog/article?id=' . $value["id"] . '"><div class="well well-sm"><h2>' . $value["title"] . '</h2><p>' . $croppedBody . '... <strong>Read More</strong></p></div></a>';
+          $body = $croppedBody . '... <b>Read More</b>';
         } else {
-          $articleList .= '<a href="http://localhost/blog/article?id=' . $value["id"] . '"><div class="well well-sm"><h2>' . $value["title"] . '</h2><p>' . $value["body"] . '</p></div></a>';
+          $body = $value["body"];
         }
+
+        // if (is_null($value['image']))
+
+        is_null($value['image']) ? $image = '' : $image = '<img src="' . BASE_URL . UPLOADS . $value["image"] . '" alt="Article image" />';
+        // var_dump ($value['image']);
+
+        //building the article snippet
+        $articleList .= '<a class="link-to-article" href="http://localhost/blog/article?id=' . $value["id"] . '">
+                          <div class="article-snippet">
+                            <h2>' . $value["title"] . '</h2> '.
+                            $image .
+                            // <img src="' . BASE_URL . UPLOADS . $value["image"] . '" alt="Article image" />
+                            ' <p>' . $body . '</p>
+                          </div>
+                        </a>';
+
+        // if (strlen($croppedBody) < strlen($value["body"])){
+        //   $articleList .= '<a href="http://localhost/blog/article?id=' . $value["id"] . '"><div class="article-snippet"><h2>' . $value["title"] . '</h2><img src="' . BASE_URL . UPLOADS . $value["image"] . '" alt="Article image" /><p>' . $croppedBody . '... <strong>Read More</strong></p></div></a>';
+        // } else {
+        //   $articleList .= '<a href="http://localhost/blog/article?id=' . $value["id"] . '"><div class="article-snippet"><h2>' . $value["title"] . '</h2><img src="' . BASE_URL . UPLOADS . $value["image"] . '" alt="Article image" /><p>' . $value["body"] . '</p></div></a>';
+        // }
       }
 
       // We send back the total number of page and the article list

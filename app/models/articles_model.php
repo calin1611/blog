@@ -23,13 +23,13 @@
     }
 
     function getArticlesForPage($begin, $limit) {
-      $statement = $this->executeQuery('SELECT id, title, body FROM articles WHERE status = "approved" ORDER BY `articles`.`id` DESC LIMIT ' . $begin . ', ' . $limit);
+      $statement = $this->executeQuery('SELECT id, title, body, image FROM articles WHERE status = "approved" ORDER BY `articles`.`id` DESC LIMIT ' . $begin . ', ' . $limit);
       return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     function insertArticle($article) {
-        $query = "INSERT INTO articles (title, body, user_id) VALUES (:title, :body, :user_id);";
-        $queryParameters = array(':title' => $article["title"] , ':body' => $article["body"], ':user_id' => $article["user_id"]);
+        $query = "INSERT INTO articles (title, body, user_id, image) VALUES (:title, :body, :user_id, :image);";
+        $queryParameters = array(':title' => $article["title"] , ':body' => $article["body"], ':user_id' => $article["user_id"], ':image' => $article["image"]);
         $this->executeQueryNamedParameters($query, $queryParameters);
         return $this->db->lastInsertId();
     }
