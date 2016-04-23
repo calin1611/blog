@@ -1,5 +1,5 @@
 <h1>Articles</h1>
-
+<?php var_dump($_SESSION); ?>
 <div>
 
   <div id="articleArea" class=".col-md-6"></div> <!-- Where articles appear -->
