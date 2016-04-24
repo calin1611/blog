@@ -19,6 +19,7 @@ class Article {
 
     // retrieve user (author) data
     $usersModel = new UsersModel();
+
     $user = $usersModel->getUserById($article['user_id']);
 
     $articleAuthor = $user['username'];
