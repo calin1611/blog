@@ -125,4 +125,5 @@ class Articles {
       echo json_encode($dataBack);
     }
   }
+
 }
