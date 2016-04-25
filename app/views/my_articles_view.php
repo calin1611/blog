@@ -32,6 +32,13 @@
           </div>
 
 
+          <div>
+            <label for="form-title">Current Image</label>
+            <div ><img class="img-modal" id="img-current" src="" /></div>
+
+          </div>
+
+
           <div id="selectImage">
             <label>Select Your Image</label><br/>
             <input type="file" name="file" id="file" required >
@@ -39,7 +46,10 @@
             <!-- <label id="file-validation">Please upload only .gif .jpg .png files</label> -->
           </div>
 
-          <div id="image_preview"><img id="previewing" src="" /></div>
+          <div>
+            <label>New Image</label><br/>
+            <div id="image_preview"><img id="previewing" src="" /></div>
+          </div>
 
 
           <div class="modal-footer">
@@ -62,6 +72,6 @@
   $jsScripts = array(
     "<script src='" . BASE_URL . JS ."my_articles.js'></script>",
     "<script src='" . BASE_URL . JS ."upload.js'></script>");
-    
+
   $jsScriptsLength = count($jsScripts)
 ?>

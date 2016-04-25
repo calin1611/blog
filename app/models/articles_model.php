@@ -43,6 +43,11 @@
       $statement = $this->executeQuery("UPDATE articles SET title ='".$article["title"]."',body = '".$article["body"]."' WHERE id =".$article["id"]);
       return $statement->rowCount();
     }
+    //like updateArticle() ^ but with image
+    function updateArticlewImage($article) {
+      $statement = $this->executeQuery("UPDATE articles SET title ='".$article["title"]."', body = '".$article["body"]."', image = '".$article["image"]."' WHERE id =".$article["id"]);
+      return $statement->rowCount();
+    }
 
     function approveArticle($article) {
       $statement = $this->executeQuery("UPDATE articles SET status = 'approved' WHERE id =".$article["id"]);

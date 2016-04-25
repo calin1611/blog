@@ -48,6 +48,7 @@ $( document ).ready(function() {
           $('input[name=title]').val(data.title);
           $('textarea').val(data.body);
           $('input[name=id]').val(data.id);
+          $('#img-current').attr('src', window.baseURL + 'uploads/' + data.image);
       }
     });
   });

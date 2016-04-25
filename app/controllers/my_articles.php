@@ -59,14 +59,6 @@ var_dump($_SESSION);
       echo json_encode($articles);
     }
 
-    function getUsersJson($value='') {
-      header('Content-Type: application/json');
-
-      $usersModel = new UsersModel();
-      $users = $usersModel->getAll();
-      echo json_encode($users);
-    }
-
     function getArticle() {
       header('Content-Type: application/json');
 
@@ -83,40 +75,9 @@ var_dump($_SESSION);
       parse_str(file_get_contents("php://input"), $PUT);
 
       $articlesModel = new ArticlesModel();
-      $article = $articlesModel->updateArticle($PUT);
+      $article = $articlesModel->updateArticlewImage($PUT);
 
       echo json_encode($article);
-    }
-
-    function approveArticle() {
-      header('Content-Type: application/json');
-
-      $articlesModel = new ArticlesModel();
-      $article = $articlesModel->approveArticle($_GET);
-      echo json_encode($article);
-    }
-
-    function unApproveArticle() {
-      header('Content-Type: application/json');
-
-      $articlesModel = new ArticlesModel();
-      $article = $articlesModel->unApproveArticle($_GET);
-      echo json_encode($article);
-    }
-
-    function addArticle() { // delete?
-      header('Content-Type: application/json');
-
-      if ((isset($_POST['title']) && !empty($_POST['title'])) && (isset($_POST['body']) && !empty($_POST['body']))) {
-        $article["title"] = $_POST['title'];
-        $article["body"] = $_POST['body'];
-        $article["user_id"] = $_SESSION['id'];
-
-        $articlesModel = new ArticlesModel();
-
-        $result = $articlesModel->insertArticle($article);
-        echo json_encode($result);
-      }
     }
 
     function deleteArticle() {
@@ -128,29 +89,4 @@ var_dump($_SESSION);
       echo json_encode($article);
     }
 
-
-    function mkAdmin() {
-      header('Content-Type: application/json');
-
-      $usersModel = new UsersModel();
-      $user = $usersModel->mkAdmin($_GET);
-      echo json_encode($user);
-    }
-
-    function mkUser() {
-      header('Content-Type: application/json');
-
-      $usersModel = new UsersModel();
-      $user = $usersModel->mkUser($_GET);
-      echo json_encode($user);
-    }
-
-    function deleteUser() {
-      header('Content-Type: application/json');
-      parse_str(file_get_contents("php://input"), $DELETE);
-
-      $usersModel = new UsersModel();
-      $user = $usersModel->deleteUser($DELETE);
-      echo json_encode($user);
-    }
   }

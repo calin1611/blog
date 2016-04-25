@@ -52,7 +52,7 @@ $( document ).ready(function() {
           url: "http://localhost/blog/admin/updateArticle",
           data: articleForm.serialize(),
           type: 'json',
-          method: 'POST',
+          method: 'PUT',
           success: function(data) {
             // articleForm[0].reset();
             $('#myModal').modal('hide');
