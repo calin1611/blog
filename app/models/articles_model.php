@@ -12,6 +12,11 @@
       return $statement->fetchAll(PDO::FETCH_ASSOC)[0];
     }
 
+    function getArticleByUser($userId){
+      $statement = $this->executeQuery("SELECT * FROM articles WHERE user_id = " . $userId);
+      return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     function countArticles() {
       $statement = $this->executeQuery("SELECT COUNT(id) FROM articles");
       return $statement->fetch(PDO::FETCH_ASSOC)['COUNT(id)'];

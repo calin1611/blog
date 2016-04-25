@@ -53,7 +53,7 @@
 
                   // General links
                   echo "<li><a href='http://localhost/blog/post'>Post an article</a></li>";
-                  echo "<li><a href='#'>My articles</a></li>";
+                  echo "<li><a href='" . BASE_URL . "my_articles'>My articles</a></li>";
 
                   echo "<li role='separator' class='divider'></li>";
 

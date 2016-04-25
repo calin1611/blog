@@ -9,7 +9,8 @@
         "login" => array("path" => "login.php", "class" => "Login"),
         "signup" => array("path" => "signup.php", "class" => "Signup"),
         "admin" => array("path" => "admin.php", "class" => "Admin"),
-        "post" => array("path" => "post.php", "class" => "Post")
+        "post" => array("path" => "post.php", "class" => "Post"),
+        "my_articles" => array("path" => "my_articles.php", "class" => "My_articles")
       );
 
       //structura: localhost/rootFolder/controller/method

@@ -24,6 +24,10 @@ table td {
   text-align: right;
 }
 
+.appr-unappr {
+  cursor: default;
+}
+
 .loader-div {
   text-align: center;
 }
