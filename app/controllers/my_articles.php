@@ -6,7 +6,6 @@
 
     function index() {
       if (array_key_exists("logged", $_SESSION)) {
-var_dump($_SESSION);
         // build page
         $title = "My Articles";
         $pageContent = VIEWS . "my_articles_view.php";
@@ -73,7 +72,6 @@ var_dump($_SESSION);
 
       //Recover PUT method values
       parse_str(file_get_contents("php://input"), $PUT);
-
       $articlesModel = new ArticlesModel();
       $article = $articlesModel->updateArticlewImage($PUT);
 

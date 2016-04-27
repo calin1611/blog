@@ -47,29 +47,16 @@ $( document ).ready(function() {
 
   $('input[type=submit]').on('click', function() {
     var articleForm = $('#articleForm');
-      if($('input[name=id]').val() !== '') {
-        $.ajax({
-          url: "http://localhost/blog/admin/updateArticle",
-          data: articleForm.serialize(),
-          type: 'json',
-          method: 'PUT',
-          success: function(data) {
-            // articleForm[0].reset();
-            $('#myModal').modal('hide');
-            getArticles();
-          }
-        });
-      } else {
-       $.ajax({
-         url: "http://localhost/blog/admin/addArticle",
-         data: articleForm.serialize(),
-         method: 'POST',
-         success: function(data) {
-           articleForm[0].reset();
-           getArticles();
-         }
-       });
-     }
+    $.ajax({
+      url: "http://localhost/blog/admin/updateArticle",
+      data: articleForm.serialize(),
+      type: 'json',
+      method: 'PUT',
+      success: function(data) {
+        $('#myModal').modal('hide');
+        getArticles();
+      }
+    });
   });
 
   $('input[type=button]').on('click', function() {

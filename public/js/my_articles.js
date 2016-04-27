@@ -56,28 +56,17 @@ $( document ).ready(function() {
   // Save the changes to the article
   $('input[type=submit]').on('click', function() {
     var articleForm = $('#articleForm');
-      if($('input[name=id]').val() !== '') {
-        $.ajax({
-          url: "http://localhost/blog/admin/updateArticle",
-          data: articleForm.serialize(),
-          type: 'json',
-          method: 'POST',
-          success: function(data) {
-            $('#myModal').modal('hide');
-            getArticles();
-          }
-        });
-      } else {
-       $.ajax({
-         url: "http://localhost/blog/admin/addArticle",
-         data: articleForm.serialize(),
-         method: 'POST',
-         success: function(data) {
-           articleForm[0].reset();
-           getArticles();
-         }
-       });
-     }
+    $.ajax({
+      // url: "http://localhost/blog/admin/updateArticle",
+      url: "http://localhost/blog/post/updateArticle",
+      data: articleForm.serialize(),
+      type: 'json',
+      method: 'POST',
+      success: function(data) {
+        $('#myModal').modal('hide');
+        getArticles();
+      }
+    });
   });
 
   // Clear the fields of the article

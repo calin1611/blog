@@ -61,4 +61,47 @@ class Post {
     }
   }
 
+  function updateArticle(){
+    $articlesModel = new ArticlesModel();
+
+    if ((isset($_POST['title']) && !empty($_POST['title'])) && (isset($_POST['body']) && !empty($_POST['body']))) {
+
+      // build article
+      $article["title"] = $_POST['title'];
+      $article["body"] = $_POST['body'];
+      $article["user_id"] = $_SESSION['id'];
+
+      if (!empty($_FILES["file"])) {
+
+        //get file name
+        $fileName = $_FILES["file"]['name'];
+
+        //get file extension
+        $ext = pathinfo($fileName, PATHINFO_EXTENSION);
+
+        //if picture
+        if (($ext == 'jpg') || ($ext == 'jpeg') || ($ext == 'png') || ($ext == 'gif')) {
+          move_uploaded_file($_FILES["file"]["tmp_name"], UPLOADS.$fileName);
+
+          // hash filename and concatenate the extension
+          $fileNameHashed = md5_file(UPLOADS.$fileName) . '.' . $ext;
+          rename(UPLOADS.$fileName, UPLOADS.$fileNameHashed);
+
+          $article["image"] = $fileNameHashed;
+        } else {
+          http_response_code(500);
+          echo "wrong filetype";
+          return;
+        }
+      }
+
+      // $articlesModel->updateArticlewImage($article);
+      $articlesModel->updateArticle($article);
+
+      http_response_code(200);
+    } else {
+      http_response_code(500);
+    }
+  }
+
 }

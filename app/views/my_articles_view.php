@@ -41,9 +41,7 @@
 
           <div id="selectImage">
             <label>Select Your Image</label><br/>
-            <input type="file" name="file" id="file" required >
-            <!-- <input type="submit" value="Upload" class="submit" disabled /> -->
-            <!-- <label id="file-validation">Please upload only .gif .jpg .png files</label> -->
+            <input type="file" name="file" id="file" >
           </div>
 
           <div>
@@ -56,13 +54,9 @@
             <input class="btn btn-default" type="submit" value="Save">
             <input class="btn btn-danger" type="button" value="RESET">
           </div>
-          <!-- <div><button id="resetForm">Reset Form</button></div> -->
         </form>
       </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
+
     </div>
   </div>
 </div> <!--End Modal -->
@@ -70,8 +64,7 @@
 <!-- Js scripts insertion -->
 <?php
   $jsScripts = array(
-    "<script src='" . BASE_URL . JS ."my_articles.js'></script>",
-    "<script src='" . BASE_URL . JS ."upload.js'></script>");
+    "<script src='" . BASE_URL . JS ."my_articles.js'></script>");
 
   $jsScriptsLength = count($jsScripts)
 ?>

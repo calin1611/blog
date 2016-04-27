@@ -102,21 +102,6 @@
       echo json_encode($article);
     }
 
-    function addArticle() { // delete?
-      header('Content-Type: application/json');
-
-      if ((isset($_POST['title']) && !empty($_POST['title'])) && (isset($_POST['body']) && !empty($_POST['body']))) {
-        $article["title"] = $_POST['title'];
-        $article["body"] = $_POST['body'];
-        $article["user_id"] = $_SESSION['id'];
-
-        $articlesModel = new ArticlesModel();
-
-        $result = $articlesModel->insertArticle($article);
-        echo json_encode($result);
-      }
-    }
-
     function deleteArticle() {
       header('Content-Type: application/json');
       parse_str(file_get_contents("php://input"), $DELETE);
