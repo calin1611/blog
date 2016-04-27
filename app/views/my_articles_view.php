@@ -1,4 +1,6 @@
-<h1>Articles</h1>
+<h1 class="col-md-12 text-center">Welcome, <?php echo $_SESSION['logged']; ?>!</h1>
+<h2 class="col-md-12 ">Your articles</h2>
+
 
 <table class="table table-hover" id="articlesTbl">
 </table>
@@ -17,20 +19,42 @@
             <input type="hidden" name="id">
           </div>
 
+
           <div>
             <label for="form-title">Title</label>
             <input class="form-control" id="form-title" type="text" name="title">
           </div>
 
+
           <div>
-            <label for="form-title">Body</label>
+            <label for="form-title">Article</label>
             <textarea class="form-control" id="form-body" name="body" cols="20" rows="5"></textarea>
           </div>
 
+
+          <div>
+            <label for="form-title">Current Image</label>
+            <div ><img class="img-modal" id="img-current" src="" /></div>
+
+          </div>
+
+
+          <div id="selectImage">
+            <label>Select Your Image</label><br/>
+            <input type="file" name="file" id="file" >
+          </div>
+
+          <div>
+            <label>New Image</label><br/>
+            <div id="image_preview"><img id="previewing" src="" /></div>
+          </div>
+
+
           <div class="modal-footer">
             <input class="btn btn-default" type="submit" value="Save">
-            <!-- <input class="btn btn-danger" type="button" value="RESET"> -->
+            <input class="btn btn-danger" type="button" value="RESET">
           </div>
+          <!-- <div><button id="resetForm">Reset Form</button></div> -->
         </form>
       </div>
     </div>
@@ -39,6 +63,9 @@
 
 <!-- Js scripts insertion -->
 <?php
-  $jsScripts = array("<script src='" . BASE_URL . JS ."app.js'></script>");
+  $jsScripts = array(
+    "<script src='" . BASE_URL . JS ."my_articles.js'></script>",
+    "<script src='" . BASE_URL . JS ."upload.js'></script>");
+
   $jsScriptsLength = count($jsScripts)
 ?>

@@ -4,6 +4,16 @@
 
   class Admin {
 
+    private function bounce(){
+      if (!array_key_exists("admin", $_SESSION)) {
+        //restrict access
+        $title = "Restricted page";
+        $pageContent = VIEWS . "restricted_view.php";
+        include VIEWS . "layout_view.php";
+        exit;
+      }
+    }
+
     function index() {
       if (array_key_exists("admin", $_SESSION)) {
 
@@ -50,6 +60,7 @@
     }
 
     function getJson($value='') {
+      $this->bounce();
       header('Content-Type: application/json');
 
       $articlesModel = new ArticlesModel();
@@ -58,6 +69,8 @@
     }
 
     function getUsersJson($value='') {
+      $this->bounce();
+
       header('Content-Type: application/json');
 
       $usersModel = new UsersModel();
@@ -102,20 +115,6 @@
       echo json_encode($article);
     }
 
-    function addArticle() { // delete?
-      header('Content-Type: application/json');
-
-      if ((isset($_POST['title']) && !empty($_POST['title'])) && (isset($_POST['body']) && !empty($_POST['body']))) {
-        $article["title"] = $_POST['title'];
-        $article["body"] = $_POST['body'];
-        $article["user_id"] = $_SESSION['id'];
-
-        $articlesModel = new ArticlesModel();
-
-        $result = $articlesModel->insertArticle($article);
-        echo json_encode($result);
-      }
-    }
 
     function deleteArticle() {
       header('Content-Type: application/json');

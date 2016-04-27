@@ -44,7 +44,7 @@
       // return $statement->rowCount();
       return "approved";
     }
-
+    
     function unApproveArticle($article) {
       $statement = $this->executeQuery("UPDATE articles SET status = 'pending' WHERE id =".$article["id"]);
       return "UNapproved";

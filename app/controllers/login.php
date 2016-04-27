@@ -32,9 +32,15 @@
 
           //check if the provided username and password match
           $credentialsCheckResult = $loginModel->checkCredentials($credentials);
-
           if ($credentialsCheckResult != false) {
+            if (password_verify($credentials["password"], $result['password'])) {
+              // var_dump($credentialsCheckResult);
+              // die;
+              // echo "vf";
+              // die;
+            }
             $status = 'ok';
+
           } else {
             // check if the username exists
             $userExists = $loginModel->checkIfUserExists($credentials['username']);
