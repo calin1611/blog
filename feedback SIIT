@@ -1,0 +1,15 @@
+error handling pe callurile de ajax
+  daca s-a intamplat ceva sa apara un mesaj ca a crapat
+
+la paginare fara id, ci cu data-page-number
+
+fara mutare de $_POST in alt array identic
+
+$result =  $statement->fetch(PDO::FETCH_ASSOC);
+
+return $statement->fetch(PDO::FETCH_ASSOC);
+
+  $this->bounce(); mai bine cu __Construct
+
+
+ajax stie sa ia si html, nu doar json

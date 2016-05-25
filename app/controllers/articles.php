@@ -83,6 +83,8 @@ class Articles {
       $articleList = '';
 
       $articlesOnPage = $articlesModel->getArticlesForPage($start, $per_page);
+      // var_dump($start);
+      // var_dump($per_page);
       foreach ($articlesOnPage as $value) {
 
         //Cropping the body of the article

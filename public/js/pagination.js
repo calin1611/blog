@@ -23,7 +23,7 @@ function getPage(elem) {
 
   var pagination = ''; // Init pagination
 
-  var data = {page: page, per_page: 8}; // Create JSON which will be sent via Ajax
+  var data = {page: page, per_page: 4}; // Create JSON which will be sent via Ajax
   // the number of articles per page: per_page = 4.
 
   $.ajax({ // jQuery Ajax

@@ -72,10 +72,6 @@ $( document ).ready(function() {
      }
   });
 
-  $('input[type=button]').on('click', function() {
-    $('#articleForm [name]').val('');
-  });
-
 
   $('#articlesTbl').on('click', '[data-approve-id]', function() {
     console.log($(this).data('approve-id'));
